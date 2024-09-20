@@ -1,0 +1,2200 @@
+
+    <!DOCTYPE html>
+    <html>
+    
+    <head>
+        <title>LostX Panel</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/vant@4/lib/index.css" />
+        <script src="https://fastly.jsdelivr.net/npm/vue@3"></script>
+        <script src="https://fastly.jsdelivr.net/npm/vant@4/lib/vant.min.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@700&display=swap" rel="stylesheet">
+        <style>
+
+        body {
+            width: 600px;
+            height: 350px;
+            font-family: 'Noto Sans TC', sans-serif;
+            background-size: cover;
+
+            background-position: center center;
+            border-radius: 10px;
+        }
+
+        * {
+            color: #ffffff;
+            font-size: 12px;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+            /* Non-prefixed version, currently */
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+           
+        }
+
+     
+
+        nobr {
+            white-space: nowrap;
+            display: flex;
+        }
+
+
+        canvas {
+            position: absolute;
+
+            z-index: -1;
+        }
+
+        .scrollbar {
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            border-radius: 15px;
+        }
+
+        .scrollbar::-webkit-scrollbar {
+            width: 10px;
+            height: 5px;
+
+        }
+
+        .scrollbar::-webkit-scrollbar-track {
+
+            border-radius: 15px;
+        }
+
+        .scrollbar::-webkit-scrollbar-thumb {
+            border-radius: 15px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0);
+            background-color: #00b7ff;
+        }
+
+        .left {
+
+
+            width: 200px;
+            height: 100%;
+        }
+
+        .left1 {
+            border-radius: 10px;
+            width: 150px;
+            height: 220px;
+            margin-top: 15px;
+            margin-left: 30px;
+            background-color: rgba(0, 0, 0, 0);
+            text-align: center;
+            overflow: auto;
+            border: none;
+            border: 1px solid #ffffff;
+            box-shadow: 0 0 0px #ffffff inset, 0 0 5px #ffffff;
+        }
+
+        .left1 .van-image {
+            position: relative;
+            display: inline-block;
+            margin-top: 15px;
+
+        }
+
+        .left1 .van-button {
+
+            text-align: center;
+            font-size: 50px;
+            width: 90px;
+            border-radius: 5px;
+            background-color: #00000000;
+            border: none;
+            border: 1px solid #ffffff;
+            box-shadow: 0 0 0px #ffffff inset, 0 0 5px #ffffff;
+            margin: 10px;
+
+
+        }
+        
+        .left2 img {
+            border-radius: 10px;
+            width: 100; /* Ensures the image fits within the #left1 container */
+            height:150; /* Keeps the image's aspect ratio */
+            display: flex;
+            border: none;
+            border: 1px solid #ffffff;
+            box-shadow: 0 0 0px #ffffff inset, 0 0 5px #ffffff;
+            position: sticky;
+            display: inline-block;
+            z-index: 0;
+            margin-top: 5px;
+            margin-left: 30px;
+        }
+
+        .right {
+
+            height: 100%;
+            overflow: auto;
+        }
+
+        .right1 {
+            border-radius: 10px;
+            width: 370px;
+            height: 350px;
+            margin-top: 15px;
+            margin-left: 16px;
+            background-color: rgba(0, 0, 0, 0);
+            text-align: center;
+            overflow: auto;
+            border: none;
+            border: 1px solid #ffffff;
+            box-shadow: 0 0 0px #ffffff inset, 0 0 5px #ffffff;
+        }
+
+        
+
+        .ayimgui {
+            background-color: #000000;
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            border: 4px solid #00aeff;
+            box-shadow: 0 0 20px #00a2ff inset, 0 0 40px #00b7ff;
+            display: flex;
+        }
+
+        .right .van-button {
+            margin: 10px;
+            text-align: center;
+            font-size: 50px;
+            width: 100px;
+            border-radius: 5px;
+            background-color: #00000000;
+            border: none;
+            border: 1px solid #ffffff;
+            box-shadow: 0 0 0px #ffffff inset, 0 0 5px #ffffff;
+            margin-top: 10px;
+
+
+
+        }
+
+        .van-button {
+            margin: 10px;
+            text-align: center;
+            font-size: 50px;
+            width: 100px;
+            border-radius: 5px;
+            background-color: #ffffff;
+            border: none;
+            border: 1px solid #ffffff;
+            box-shadow: 0 0 0px #ffffff inset, 0 0 5px #ffffff;
+
+            margin-top: 25px;
+            margin-left: 25px;
+
+
+        }#FF0000
+
+        .van-notify {
+            z-index: 99;
+            position: fixed;
+        }
+
+        .right .van-cell {
+            margin: 10px;
+            text-align: center;
+            font-size: 50px;
+            width: 188px;
+            border-radius: 5px;
+            background-color: #ffffff;
+            border: none;
+            border: 1px solid #ffffff;
+            box-shadow: 0 0 0px #ffffff inset, 0 0 5px hsl(0, 0%, 100%);
+            margin-top: 50px;
+            margin-left: 100px;
+        }
+
+        .van-cell {
+            margin: 10px;
+            text-align: center;
+            font-size: 50px;
+            width: 400px;
+            border-radius: 5px;
+            background-color: #ffffff;
+            border: none;
+            border: 1px solid #ffffff;
+            box-shadow: 0 0 0px #ffffff inset, 0 0 5px #ffffff;
+            margin-top: 25px;
+            margin-left: 25px;
+        }
+
+        .van-field__control {
+            display: block;
+            box-sizing: border-box;
+            width: 100%;
+            min-width: 0;
+            margin: 0;
+            padding: 0;
+            color: white;
+            line-height: inherit;
+            text-align: left;
+            background-color: transparent;
+            border: 0;
+            resize: none;
+            -webkit-user-select: auto;
+            user-select: auto;
+        }
+        .left2 {
+                border-radius: 10px;
+                width: 150px;
+                height: 80px;
+                margin-top: 15px;
+                margin-left: 30px;
+                background-color: rgba(3, 3, 3, 0);
+                display: flex;
+                border: none;
+                border: 1px solid #ffffff;
+                box-shadow: 0 0 0px #ffffff inset, 0 0 5px #ffffff;
+    
+            }
+            #tsw {
+            color: rgb(0, 217, 255);
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            font-size: 11px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<script src="js/alert.js"></script>
+<body>
+    <div id="app">
+        <div class="ayimgui">
+            <div id="particles-js"></div>
+            <template v-if="!bsok">
+                <div class="pabg">
+                    <div class="left1">
+                        <van-image width="80" height="60" src="https://i.postimg.cc/ZqBywJ5L/photo-2024-09-18-05-16-44-removebg-preview.png" />
+                        </van-image><br>
+                        <van-button @click="changeTab('1')" size="small">function ↪ </van-button><br>
+                <van-button @click="changeTab('0')" size="small">Sniper ↪ </van-button><br>
+                        <van-button @click="changeTab('2')" size="small">Chams ↪ </van-button><br>
+                        <van-button @click="changeTab('3')" size="small">Speed ↪ </van-button><br>
+                    </div>
+                    <div class="left2">
+                        <div class="font">
+                          <font2 style="color: rgb(255, 255, 255);">&nbsp;&nbsp;&nbsp;&nbsp;<br>ㅤ ↪ Expires Panel ㅤ<font1> </font>
+                            <br>
+                            <font2 style="color: rgb(0, 153, 255);">&nbsp;&nbsp;&nbsp;&nbsp;<font1></font> <span id="expires" style="color: rgb(0, 153, 255);"></span>
+                            <font2 style="color: rgb(0, 153, 255);">&nbsp;&nbsp;&nbsp;&nbsp;<font1></font><span id="datetime"></span>
+                        </div>
+											
+									 <br>
+                            <label1 class="expires"></label1>
+                        </div>
+                    </div>
+                </div>
+                <div class="right">
+                    
+                    <div class="right1">
+                        <div v-show="tabValue==='0'">
+                            <p>
+                                <font style="color:var(--color-g)rgb(119, 0, 255)">&nbsp;&nbsp;&nbsp;&nbsp;AWM</font>
+                            </p>
+                            <van-button size="small" color="#var(--color-a)" onclick="s100s()">Awm Aim </van-button>
+                            <van-button size="small" color="#var(--color-a)" onclick="s105s()">Awm Scop</van-button><br>
+                            <van-button size="small" color="#var(--color-a)" onclick="s89()">Arm Switch</van-button>
+                            <van-button size="small" color="#var(--color-a)" onclick="s101s()">Awm Switch</van-button>
+                            
+                            <p>
+                                <font style="color:var(--color-g)aqua">&nbsp;&nbsp;&nbsp;&nbsp;BUFF</font>
+                            </p>
+                            <van-button size="small" color="#var(--color-a)" onclick="sk()">Buff Sensi</van-button>
+                            <van-button size="small" color="#var(--color-a)" onclick="s08()">Buff Jump</van-button><br>
+                        <van-button size="small" color="#var(--color-a)" onclick="so88()">Buff Dame</van-button>
+        
+                        </div>
+                        <div v-show="tabValue === '1'">
+                            <p>
+                                <font style="color:var(--color-g)aqua">&nbsp;&nbsp;&nbsp;&nbsp;AIM</font>
+                            </p>
+                    <van-button size="small" color="#var(--color-a)" onclick="s100s()">Aim 180</van-button>
+                            <van-button size="small" color="#var(--color-a)" onclick="s105s()">Aim Fov</van-button><br>
+                            <van-button size="small" color="#var(--color-a)" onclick="s89()">Aim Lock</van-button>
+                            <van-button size="small" color="#var(--color-a)" onclick="s101s()">Aim Cope</van-button>
+                            
+                            <p>
+                                <font style="color:var(--color-g)aqua">&nbsp;&nbsp;&nbsp;&nbsp;OTHER</font>
+                            </p>
+                            <van-button size="small" color="#var(--color-a)" onclick="sk()">No Recoli</van-button>
+                            <van-button size="small" color="#var(--color-a)" onclick="s08()">Lock Scop</van-button><br>
+                        <van-button size="small" color="#var(--color-a)" onclick="so88()">Magec Bullet</van-button>
+        
+                        </div>
+                        <div v-show="tabValue === '2'">
+                            <br>
+                            <p></p>
+                                <font style="color:var(--color-g)">&nbsp;&nbsp;&nbsp;&nbsp;ANTENNA </font>
+                            </p>
+                            
+                            <van-button size="small" color="#var(--color-a)" onclick="so90()">Antenna X1</van-button>
+                            <van-button size="small" color="#var(--color-a)" onclick="so91()">Antenna X2</van-button>
+                            <van-button size="small" color="#var(--color-a)" onclick="so92()">Antenna X3</van-button><br>
+                            <p></p>
+                            <font style="color:var(--color-g)">&nbsp;&nbsp;&nbsp;&nbsp;CAMIRA</font>
+                        </p>
+                        <van-button size="small" color="#var(--color-a)" onclick="xa()">Cam Xa </van-button>
+                        <van-button size="small" color="#var(--color-a)" onclick="cao()">Cam Cao </van-button>
+                        <van-button size="small" color="#var(--color-a)" onclick="ZomCamxa()">Cam Pc  </van-button>
+
+                        </div>
+                        <div v-show="tabValue === '3'">
+                            <br>
+                            <p>
+                                <font style="color:var(--color-g)">&nbsp;&nbsp;&nbsp;&nbsp;SPEED </font>
+                                </p>
+
+                                <van-button size="small" color="#var(--color-a)" onclick="so90()">SPeed X2</van-button>
+                                <van-button size="small" color="#var(--color-a)" onclick="so91()">SPeed X5</van-button>
+                                <van-button size="small" color="#var(--color-a)" onclick="so92()">Bypass Bosst</van-button><br>
+        </div>
+        </template>
+    </div>
+    </div>
+
+
+    <script>
+        function hexToRgb(e) {
+            var a = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+            e = e.replace(a, function(e, a, t, i) {
+                return a + a + t + t + i + i
+            });
+            var t = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(e);
+            return t ? {
+                r: parseInt(t[1], 16),
+                g: parseInt(t[2], 16),
+                b: parseInt(t[3], 16)
+            } : null
+        }
+
+        function clamp(e, a, t) {
+            return Math.min(Math.max(e, a), t)
+        }
+
+        function isInArray(e, a) {
+            return a.indexOf(e) > -1
+        }
+        var pJS = function(e, a) {
+            var t = document.querySelector("#" + e + " > .particles-js-canvas-el");
+            this.pJS = {
+                canvas: {
+                    el: t,
+                    w: t.offsetWidth,
+                    h: t.offsetHeight
+                },
+            };
+            var i = this.pJS;
+            a && Object.deepExtend(i, a), i.tmp.obj = {
+                size_value: i.particles.size.value,
+                size_anim_speed: i.particles.size.anim.speed,
+                move_speed: i.particles.move.speed,
+                line_linked_distance: i.particles.line_linked.distance,
+                line_linked_width: i.particles.line_linked.width,
+                mode_grab_distance: i.interactivity.modes.grab.distance,
+                mode_bubble_distance: i.interactivity.modes.bubble.distance,
+                mode_bubble_size: i.interactivity.modes.bubble.size,
+                mode_repulse_distance: i.interactivity.modes.repulse.distance
+            }, i.fn.retinaInit = function() {
+                i.retina_detect && window.devicePixelRatio > 1 ? (i.canvas.pxratio = window.devicePixelRatio, i.tmp.retina = !0) : (i.canvas.pxratio = 1, i.tmp.retina = !1), i.canvas.w = i.canvas.el.offsetWidth * i.canvas.pxratio, i.canvas.h = i.canvas.el.offsetHeight * i.canvas.pxratio, i.particles.size.value = i.tmp.obj.size_value * i.canvas.pxratio, i.particles.size.anim.speed = i.tmp.obj.size_anim_speed * i.canvas.pxratio, i.particles.move.speed = i.tmp.obj.move_speed * i.canvas.pxratio, i.particles.line_linked.distance = i.tmp.obj.line_linked_distance * i.canvas.pxratio, i.interactivity.modes.grab.distance = i.tmp.obj.mode_grab_distance * i.canvas.pxratio, i.interactivity.modes.bubble.distance = i.tmp.obj.mode_bubble_distance * i.canvas.pxratio, i.particles.line_linked.width = i.tmp.obj.line_linked_width * i.canvas.pxratio, i.interactivity.modes.bubble.size = i.tmp.obj.mode_bubble_size * i.canvas.pxratio, i.interactivity.modes.repulse.distance = i.tmp.obj.mode_repulse_distance * i.canvas.pxratio
+            }, i.fn.canvasInit = function() {
+                i.canvas.ctx = i.canvas.el.getContext("2d")
+            }, i.fn.canvasSize = function() {
+                i.canvas.el.width = i.canvas.w, i.canvas.el.height = i.canvas.h, i && i.interactivity.events.resize && window.addEventListener("resize", function() {
+                    i.canvas.w = i.canvas.el.offsetWidth, i.canvas.h = i.canvas.el.offsetHeight, i.tmp.retina && (i.canvas.w *= i.canvas.pxratio, i.canvas.h *= i.canvas.pxratio), i.canvas.el.width = i.canvas.w, i.canvas.el.height = i.canvas.h, i.particles.move.enable || (i.fn.particlesEmpty(), i.fn.particlesCreate(), i.fn.particlesDraw(), i.fn.vendors.densityAutoParticles()), i.fn.vendors.densityAutoParticles()
+                })
+            }, i.fn.canvasPaint = function() {
+                i.canvas.ctx.fillRect(0, 0, i.canvas.w, i.canvas.h)
+            }, i.fn.canvasClear = function() {
+                i.canvas.ctx.clearRect(0, 0, i.canvas.w, i.canvas.h)
+            }, i.fn.particle = function(e, a, t) {
+                if (this.radius = (i.particles.size.random ? Math.random() : 1) * i.particles.size.value, i.particles.size.anim.enable && (this.size_status = !1, this.vs = i.particles.size.anim.speed / 100, i.particles.size.anim.sync || (this.vs = this.vs * Math.random())), this.x = t ? t.x : Math.random() * i.canvas.w, this.y = t ? t.y : Math.random() * i.canvas.h, this.x > i.canvas.w - 2 * this.radius ? this.x = this.x - this.radius : this.x < 2 * this.radius && (this.x = this.x + this.radius), this.y > i.canvas.h - 2 * this.radius ? this.y = this.y - this.radius : this.y < 2 * this.radius && (this.y = this.y + this.radius), i.particles.move.bounce && i.fn.vendors.checkOverlap(this, t), this.color = {}, "object" == typeof e.value)
+                    if (e.value instanceof Array) {
+                        var s = e.value[Math.floor(Math.random() * i.particles.color.value.length)];
+                        this.color.rgb = hexToRgb(s)
+                    } else void 0 != e.value.r && void 0 != e.value.g && void 0 != e.value.b && (this.color.rgb = {
+                        r: e.value.r,
+                        g: e.value.g,
+                        b: e.value.b
+                    }), void 0 != e.value.h && void 0 != e.value.s && void 0 != e.value.l && (this.color.hsl = {
+                        h: e.value.h,
+                        s: e.value.s,
+                        l: e.value.l
+                    });
+                else "random" == e.value ? this.color.rgb = {
+                    r: Math.floor(256 * Math.random()) + 0,
+                    g: Math.floor(256 * Math.random()) + 0,
+                    b: Math.floor(256 * Math.random()) + 0
+                } : "string" == typeof e.value && (this.color = e, this.color.rgb = hexToRgb(this.color.value));
+                this.opacity = (i.particles.opacity.random ? Math.random() : 1) * i.particles.opacity.value, i.particles.opacity.anim.enable && (this.opacity_status = !1, this.vo = i.particles.opacity.anim.speed / 100, i.particles.opacity.anim.sync || (this.vo = this.vo * Math.random()));
+                var n = {};
+                switch (i.particles.move.direction) {
+                    case "top":
+                        n = {
+                            x: 0,
+                            y: -1
+                        };
+                        break;
+                    case "top-right":
+                        n = {
+                            x: .5,
+                            y: -.5
+                        };
+                        break;
+                    case "right":
+                        n = {
+                            x: 1,
+                            y: -0
+                        };
+                        break;
+                    case "bottom-right":
+                        n = {
+                            x: .5,
+                            y: .5
+                        };
+                        break;
+                    case "bottom":
+                        n = {
+                            x: 0,
+                            y: 1
+                        };
+                        break;
+                    case "bottom-left":
+                        n = {
+                            x: -.5,
+                            y: 1
+                        };
+                        break;
+                    case "left":
+                        n = {
+                            x: -1,
+                            y: 0
+                        };
+                        break;
+                    case "top-left":
+                        n = {
+                            x: -.5,
+                            y: -.5
+                        };
+                        break;
+                    default:
+                        n = {
+                            x: 0,
+                            y: 0
+                        }
+                }
+                i.particles.move.straight ? (this.vx = n.x, this.vy = n.y, i.particles.move.random && (this.vx = this.vx * Math.random(), this.vy = this.vy * Math.random())) : (this.vx = n.x + Math.random() - .5, this.vy = n.y + Math.random() - .5), this.vx_i = this.vx, this.vy_i = this.vy;
+                var r = i.particles.shape.type;
+                if ("object" == typeof r) {
+                    if (r instanceof Array) {
+                        var c = r[Math.floor(Math.random() * r.length)];
+                        this.shape = c
+                    }
+                } else this.shape = r;
+                if ("image" == this.shape) {
+                    var o = i.particles.shape;
+                    this.img = {
+                        src: o.image.src,
+                        ratio: o.image.width / o.image.height
+                    }, this.img.ratio || (this.img.ratio = 1), "svg" == i.tmp.img_type && void 0 != i.tmp.source_svg && (i.fn.vendors.createSvgImg(this), i.tmp.pushing && (this.img.loaded = !1))
+                }
+            }, i.fn.particle.prototype.draw = function() {
+                function e() {
+                    i.canvas.ctx.drawImage(r, a.x - t, a.y - t, 2 * t, 2 * t / a.img.ratio)
+                }
+                var a = this;
+                if (void 0 != a.radius_bubble) var t = a.radius_bubble;
+                else var t = a.radius;
+                if (void 0 != a.opacity_bubble) var s = a.opacity_bubble;
+                else var s = a.opacity;
+                if (a.color.rgb) var n = "rgba(" + a.color.rgb.r + "," + a.color.rgb.g + "," + a.color.rgb.b + "," + s + ")";
+                else var n = "hsla(" + a.color.hsl.h + "," + a.color.hsl.s + "%," + a.color.hsl.l + "%," + s + ")";
+                switch (i.canvas.ctx.fillStyle = n, i.canvas.ctx.beginPath(), a.shape) {
+                    case "circle":
+                        i.canvas.ctx.arc(a.x, a.y, t, 0, 2 * Math.PI, !1);
+                        break;
+                    case "edge":
+                        i.canvas.ctx.rect(a.x - t, a.y - t, 2 * t, 2 * t);
+                        break;
+                    case "triangle":
+                        i.fn.vendors.drawShape(i.canvas.ctx, a.x - t, a.y + t / 1.66, 2 * t, 3, 2);
+                        break;
+                    case "polygon":
+                        i.fn.vendors.drawShape(i.canvas.ctx, a.x - t / (i.particles.shape.polygon.nb_sides / 3.5), a.y - t / .76, 2.66 * t / (i.particles.shape.polygon.nb_sides / 3), i.particles.shape.polygon.nb_sides, 1);
+                        break;
+                    case "star":
+                        i.fn.vendors.drawShape(i.canvas.ctx, a.x - 2 * t / (i.particles.shape.polygon.nb_sides / 4), a.y - t / 1.52, 2 * t * 2.66 / (i.particles.shape.polygon.nb_sides / 3), i.particles.shape.polygon.nb_sides, 2);
+                        break;
+                    case "image":
+                        if ("svg" == i.tmp.img_type) var r = a.img.obj;
+                        else var r = i.tmp.img_obj;
+                        r && e()
+                }
+                i.canvas.ctx.closePath(), i.particles.shape.stroke.width > 0 && (i.canvas.ctx.strokeStyle = i.particles.shape.stroke.color, i.canvas.ctx.lineWidth = i.particles.shape.stroke.width, i.canvas.ctx.stroke()), i.canvas.ctx.fill()
+            }, i.fn.particlesCreate = function() {
+                for (var e = 0; e < i.particles.number.value; e++) i.particles.array.push(new i.fn.particle(i.particles.color, i.particles.opacity.value))
+            }, i.fn.particlesUpdate = function() {
+                for (var e = 0; e < i.particles.array.length; e++) {
+                    var a = i.particles.array[e];
+                    if (i.particles.move.enable) {
+                        var t = i.particles.move.speed / 2;
+                        a.x += a.vx * t, a.y += a.vy * t
+                    }
+                    if (i.particles.opacity.anim.enable && (1 == a.opacity_status ? (a.opacity >= i.particles.opacity.value && (a.opacity_status = !1), a.opacity += a.vo) : (a.opacity <= i.particles.opacity.anim.opacity_min && (a.opacity_status = !0), a.opacity -= a.vo), a.opacity < 0 && (a.opacity = 0)), i.particles.size.anim.enable && (1 == a.size_status ? (a.radius >= i.particles.size.value && (a.size_status = !1), a.radius += a.vs) : (a.radius <= i.particles.size.anim.size_min && (a.size_status = !0), a.radius -= a.vs), a.radius < 0 && (a.radius = 0)), "bounce" == i.particles.move.out_mode) var s = {
+                        x_left: a.radius,
+                        x_right: i.canvas.w,
+                        y_top: a.radius,
+                        y_bottom: i.canvas.h
+                    };
+                    else var s = {
+                        x_left: -a.radius,
+                        x_right: i.canvas.w + a.radius,
+                        y_top: -a.radius,
+                        y_bottom: i.canvas.h + a.radius
+                    };
+                    switch (a.x - a.radius > i.canvas.w ? (a.x = s.x_left, a.y = Math.random() * i.canvas.h) : a.x + a.radius < 0 && (a.x = s.x_right, a.y = Math.random() * i.canvas.h), a.y - a.radius > i.canvas.h ? (a.y = s.y_top, a.x = Math.random() * i.canvas.w) : a.y + a.radius < 0 && (a.y = s.y_bottom, a.x = Math.random() * i.canvas.w), i.particles.move.out_mode) {
+                        case "bounce":
+                            a.x + a.radius > i.canvas.w ? a.vx = -a.vx : a.x - a.radius < 0 && (a.vx = -a.vx), a.y + a.radius > i.canvas.h ? a.vy = -a.vy : a.y - a.radius < 0 && (a.vy = -a.vy)
+                    }
+                    if (isInArray("grab", i.interactivity.events.onhover.mode) && i.fn.modes.grabParticle(a), (isInArray("bubble", i.interactivity.events.onhover.mode) || isInArray("bubble", i.interactivity.events.onclick.mode)) && i.fn.modes.bubbleParticle(a), (isInArray("repulse", i.interactivity.events.onhover.mode) || isInArray("repulse", i.interactivity.events.onclick.mode)) && i.fn.modes.repulseParticle(a), i.particles.line_linked.enable || i.particles.move.attract.enable)
+                        for (var n = e + 1; n < i.particles.array.length; n++) {
+                            var r = i.particles.array[n];
+                            i.particles.line_linked.enable && i.fn.interact.linkParticles(a, r), i.particles.move.attract.enable && i.fn.interact.attractParticles(a, r), i.particles.move.bounce && i.fn.interact.bounceParticles(a, r)
+                        }
+                }
+            }, i.fn.particlesDraw = function() {
+                i.canvas.ctx.clearRect(0, 0, i.canvas.w, i.canvas.h), i.fn.particlesUpdate();
+                for (var e = 0; e < i.particles.array.length; e++) {
+                    var a = i.particles.array[e];
+                    a.draw()
+                }
+            }, i.fn.particlesEmpty = function() {
+                i.particles.array = []
+            }, i.fn.particlesRefresh = function() {
+                cancelRequestAnimFrame(i.fn.checkAnimFrame), cancelRequestAnimFrame(i.fn.drawAnimFrame), i.tmp.source_svg = void 0, i.tmp.img_obj = void 0, i.tmp.count_svg = 0, i.fn.particlesEmpty(), i.fn.canvasClear(), i.fn.vendors.start()
+            }, i.fn.interact.linkParticles = function(e, a) {
+                var t = e.x - a.x,
+                    s = e.y - a.y,
+                    n = Math.sqrt(t * t + s * s);
+                if (n <= i.particles.line_linked.distance) {
+                    var r = i.particles.line_linked.opacity - n / (1 / i.particles.line_linked.opacity) / i.particles.line_linked.distance;
+                    if (r > 0) {
+                        var c = i.particles.line_linked.color_rgb_line;
+                        i.canvas.ctx.strokeStyle = "rgba(" + c.r + "," + c.g + "," + c.b + "," + r + ")", i.canvas.ctx.lineWidth = i.particles.line_linked.width, i.canvas.ctx.beginPath(), i.canvas.ctx.moveTo(e.x, e.y), i.canvas.ctx.lineTo(a.x, a.y), i.canvas.ctx.stroke(), i.canvas.ctx.closePath()
+                    }
+                }
+            }, i.fn.interact.attractParticles = function(e, a) {
+                var t = e.x - a.x,
+                    s = e.y - a.y,
+                    n = Math.sqrt(t * t + s * s);
+                if (n <= i.particles.line_linked.distance) {
+                    var r = t / (1e3 * i.particles.move.attract.rotateX),
+                        c = s / (1e3 * i.particles.move.attract.rotateY);
+                    e.vx -= r, e.vy -= c, a.vx += r, a.vy += c
+                }
+            }, i.fn.interact.bounceParticles = function(e, a) {
+                var t = e.x - a.x,
+                    i = e.y - a.y,
+                    s = Math.sqrt(t * t + i * i),
+                    n = e.radius + a.radius;
+                n >= s && (e.vx = -e.vx, e.vy = -e.vy, a.vx = -a.vx, a.vy = -a.vy)
+            }, i.fn.modes.pushParticles = function(e, a) {
+                i.tmp.pushing = !0;
+                for (var t = 0; e > t; t++) i.particles.array.push(new i.fn.particle(i.particles.color, i.particles.opacity.value, {
+                    x: a ? a.pos_x : Math.random() * i.canvas.w,
+                    y: a ? a.pos_y : Math.random() * i.canvas.h
+                })), t == e - 1 && (i.particles.move.enable || i.fn.particlesDraw(), i.tmp.pushing = !1)
+            }, i.fn.modes.removeParticles = function(e) {
+                i.particles.array.splice(0, e), i.particles.move.enable || i.fn.particlesDraw()
+            }, i.fn.modes.bubbleParticle = function(e) {
+                function a() {
+                    e.opacity_bubble = e.opacity, e.radius_bubble = e.radius
+                }
+
+                function t(a, t, s, n, c) {
+                    if (a != t)
+                        if (i.tmp.bubble_duration_end) {
+                            if (void 0 != s) {
+                                var o = n - p * (n - a) / i.interactivity.modes.bubble.duration,
+                                    l = a - o;
+                                d = a + l, "size" == c && (e.radius_bubble = d), "opacity" == c && (e.opacity_bubble = d)
+                            }
+                        } else if (r <= i.interactivity.modes.bubble.distance) {
+                        if (void 0 != s) var v = s;
+                        else var v = n;
+                        if (v != a) {
+                            var d = n - p * (n - a) / i.interactivity.modes.bubble.duration;
+                            "size" == c && (e.radius_bubble = d), "opacity" == c && (e.opacity_bubble = d)
+                        }
+                    } else "size" == c && (e.radius_bubble = void 0), "opacity" == c && (e.opacity_bubble = void 0)
+                }
+                if (i.interactivity.events.onhover.enable && isInArray("bubble", i.interactivity.events.onhover.mode)) {
+                    var s = e.x - i.interactivity.mouse.pos_x,
+                        n = e.y - i.interactivity.mouse.pos_y,
+                        r = Math.sqrt(s * s + n * n),
+                        c = 1 - r / i.interactivity.modes.bubble.distance;
+                    if (r <= i.interactivity.modes.bubble.distance) {
+                        if (c >= 0 && "mousemove" == i.interactivity.status) {
+                            if (i.interactivity.modes.bubble.size != i.particles.size.value)
+                                if (i.interactivity.modes.bubble.size > i.particles.size.value) {
+                                    var o = e.radius + i.interactivity.modes.bubble.size * c;
+                                    o >= 0 && (e.radius_bubble = o)
+                                } else {
+                                    var l = e.radius - i.interactivity.modes.bubble.size,
+                                        o = e.radius - l * c;
+                                    o > 0 ? e.radius_bubble = o : e.radius_bubble = 0
+                                } if (i.interactivity.modes.bubble.opacity != i.particles.opacity.value)
+                                if (i.interactivity.modes.bubble.opacity > i.particles.opacity.value) {
+                                    var v = i.interactivity.modes.bubble.opacity * c;
+                                    v > e.opacity && v <= i.interactivity.modes.bubble.opacity && (e.opacity_bubble = v)
+                                } else {
+                                    var v = e.opacity - (i.particles.opacity.value - i.interactivity.modes.bubble.opacity) * c;
+                                    v < e.opacity && v >= i.interactivity.modes.bubble.opacity && (e.opacity_bubble = v)
+                                }
+                        }
+                    } else a();
+                    "mouseleave" == i.interactivity.status && a()
+                } else if (i.interactivity.events.onclick.enable && isInArray("bubble", i.interactivity.events.onclick.mode)) {
+                    if (i.tmp.bubble_clicking) {
+                        var s = e.x - i.interactivity.mouse.click_pos_x,
+                            n = e.y - i.interactivity.mouse.click_pos_y,
+                            r = Math.sqrt(s * s + n * n),
+                            p = ((new Date).getTime() - i.interactivity.mouse.click_time) / 1e3;
+                        p > i.interactivity.modes.bubble.duration && (i.tmp.bubble_duration_end = !0), p > 2 * i.interactivity.modes.bubble.duration && (i.tmp.bubble_clicking = !1, i.tmp.bubble_duration_end = !1)
+                    }
+                    i.tmp.bubble_clicking && (t(i.interactivity.modes.bubble.size, i.particles.size.value, e.radius_bubble, e.radius, "size"), t(i.interactivity.modes.bubble.opacity, i.particles.opacity.value, e.opacity_bubble, e.opacity, "opacity"))
+                }
+            }, i.fn.modes.repulseParticle = function(e) {
+                function a() {
+                    var a = Math.atan2(d, p);
+                    if (e.vx = u * Math.cos(a), e.vy = u * Math.sin(a), "bounce" == i.particles.move.out_mode) {
+                        var t = {
+                            x: e.x + e.vx,
+                            y: e.y + e.vy
+                        };
+                        t.x + e.radius > i.canvas.w ? e.vx = -e.vx : t.x - e.radius < 0 && (e.vx = -e.vx), t.y + e.radius > i.canvas.h ? e.vy = -e.vy : t.y - e.radius < 0 && (e.vy = -e.vy)
+                    }
+                }
+                if (i.interactivity.events.onhover.enable && isInArray("repulse", i.interactivity.events.onhover.mode) && "mousemove" == i.interactivity.status) {
+                    var t = e.x - i.interactivity.mouse.pos_x,
+                        s = e.y - i.interactivity.mouse.pos_y,
+                        n = Math.sqrt(t * t + s * s),
+                        r = {
+                            x: t / n,
+                            y: s / n
+                        },
+                        c = i.interactivity.modes.repulse.distance,
+                        o = 100,
+                        l = clamp(1 / c * (-1 * Math.pow(n / c, 2) + 1) * c * o, 0, 50),
+                        v = {
+                            x: e.x + r.x * l,
+                            y: e.y + r.y * l
+                        };
+                    "bounce" == i.particles.move.out_mode ? (v.x - e.radius > 0 && v.x + e.radius < i.canvas.w && (e.x = v.x), v.y - e.radius > 0 && v.y + e.radius < i.canvas.h && (e.y = v.y)) : (e.x = v.x, e.y = v.y)
+                } else if (i.interactivity.events.onclick.enable && isInArray("repulse", i.interactivity.events.onclick.mode))
+                    if (i.tmp.repulse_finish || (i.tmp.repulse_count++, i.tmp.repulse_count == i.particles.array.length && (i.tmp.repulse_finish = !0)), i.tmp.repulse_clicking) {
+                        var c = Math.pow(i.interactivity.modes.repulse.distance / 6, 3),
+                            p = i.interactivity.mouse.click_pos_x - e.x,
+                            d = i.interactivity.mouse.click_pos_y - e.y,
+                            m = p * p + d * d,
+                            u = -c / m * 1;
+                        c >= m && a()
+                    } else 0 == i.tmp.repulse_clicking && (e.vx = e.vx_i, e.vy = e.vy_i)
+            }, i.fn.modes.grabParticle = function(e) {
+                if (i.interactivity.events.onhover.enable && "mousemove" == i.interactivity.status) {
+                    var a = e.x - i.interactivity.mouse.pos_x,
+                        t = e.y - i.interactivity.mouse.pos_y,
+                        s = Math.sqrt(a * a + t * t);
+                    if (s <= i.interactivity.modes.grab.distance) {
+                        var n = i.interactivity.modes.grab.line_linked.opacity - s / (1 / i.interactivity.modes.grab.line_linked.opacity) / i.interactivity.modes.grab.distance;
+                        if (n > 0) {
+                            var r = i.particles.line_linked.color_rgb_line;
+                            i.canvas.ctx.strokeStyle = "rgba(" + r.r + "," + r.g + "," + r.b + "," + n + ")", i.canvas.ctx.lineWidth = i.particles.line_linked.width, i.canvas.ctx.beginPath(), i.canvas.ctx.moveTo(e.x, e.y), i.canvas.ctx.lineTo(i.interactivity.mouse.pos_x, i.interactivity.mouse.pos_y), i.canvas.ctx.stroke(), i.canvas.ctx.closePath()
+                        }
+                    }
+                }
+            }, i.fn.vendors.eventsListeners = function() {
+                "window" == i.interactivity.detect_on ? i.interactivity.el = window : i.interactivity.el = i.canvas.el, (i.interactivity.events.onhover.enable || i.interactivity.events.onclick.enable) && (i.interactivity.el.addEventListener("mousemove", function(e) {
+                    if (i.interactivity.el == window) var a = e.clientX,
+                        t = e.clientY;
+                    else var a = e.offsetX || e.clientX,
+                        t = e.offsetY || e.clientY;
+                    i.interactivity.mouse.pos_x = a, i.interactivity.mouse.pos_y = t, i.tmp.retina && (i.interactivity.mouse.pos_x *= i.canvas.pxratio, i.interactivity.mouse.pos_y *= i.canvas.pxratio), i.interactivity.status = "mousemove"
+                }), i.interactivity.el.addEventListener("mouseleave", function(e) {
+                    i.interactivity.mouse.pos_x = null, i.interactivity.mouse.pos_y = null, i.interactivity.status = "mouseleave"
+                })), i.interactivity.events.onclick.enable && i.interactivity.el.addEventListener("click", function() {
+                    if (i.interactivity.mouse.click_pos_x = i.interactivity.mouse.pos_x, i.interactivity.mouse.click_pos_y = i.interactivity.mouse.pos_y, i.interactivity.mouse.click_time = (new Date).getTime(), i.interactivity.events.onclick.enable) switch (i.interactivity.events.onclick.mode) {
+                        case "push":
+                            i.particles.move.enable ? i.fn.modes.pushParticles(i.interactivity.modes.push.particles_nb, i.interactivity.mouse) : 1 == i.interactivity.modes.push.particles_nb ? i.fn.modes.pushParticles(i.interactivity.modes.push.particles_nb, i.interactivity.mouse) : i.interactivity.modes.push.particles_nb > 1 && i.fn.modes.pushParticles(i.interactivity.modes.push.particles_nb);
+                            break;
+                        case "remove":
+                            i.fn.modes.removeParticles(i.interactivity.modes.remove.particles_nb);
+                            break;
+                        case "bubble":
+                            i.tmp.bubble_clicking = !0;
+                            break;
+                        case "repulse":
+                            i.tmp.repulse_clicking = !0, i.tmp.repulse_count = 0, i.tmp.repulse_finish = !1, setTimeout(function() {
+                                i.tmp.repulse_clicking = !1
+                            }, 1e3 * i.interactivity.modes.repulse.duration)
+                    }
+                })
+            }, i.fn.vendors.densityAutoParticles = function() {
+                if (i.particles.number.density.enable) {
+                    var e = i.canvas.el.width * i.canvas.el.height / 1e3;
+                    i.tmp.retina && (e /= 2 * i.canvas.pxratio);
+                    var a = e * i.particles.number.value / i.particles.number.density.value_area,
+                        t = i.particles.array.length - a;
+                    0 > t ? i.fn.modes.pushParticles(Math.abs(t)) : i.fn.modes.removeParticles(t)
+                }
+            }, i.fn.vendors.checkOverlap = function(e, a) {
+                for (var t = 0; t < i.particles.array.length; t++) {
+                    var s = i.particles.array[t],
+                        n = e.x - s.x,
+                        r = e.y - s.y,
+                        c = Math.sqrt(n * n + r * r);
+                    c <= e.radius + s.radius && (e.x = a ? a.x : Math.random() * i.canvas.w, e.y = a ? a.y : Math.random() * i.canvas.h, i.fn.vendors.checkOverlap(e))
+                }
+            }, i.fn.vendors.createSvgImg = function(e) {
+                var a = i.tmp.source_svg,
+                    t = /#([0-9A-F]{3,6})/gi,
+                    s = a.replace(t, function(a, t, i, s) {
+                        if (e.color.rgb) var n = "rgba(" + e.color.rgb.r + "," + e.color.rgb.g + "," + e.color.rgb.b + "," + e.opacity + ")";
+                        else var n = "hsla(" + e.color.hsl.h + "," + e.color.hsl.s + "%," + e.color.hsl.l + "%," + e.opacity + ")";
+                        return n
+                    }),
+                    n = new Blob([s], {
+                        type: "image/svg+xml;charset=utf-8"
+                    }),
+                    r = window.URL || window.webkitURL || window,
+                    c = r.createObjectURL(n),
+                    o = new Image;
+                o.addEventListener("load", function() {
+                    e.img.obj = o, e.img.loaded = !0, r.revokeObjectURL(c), i.tmp.count_svg++
+                }), o.src = c
+            }, i.fn.vendors.destroypJS = function() {
+                cancelAnimationFrame(i.fn.drawAnimFrame), t.remove(), pJSDom = null
+            }, i.fn.vendors.drawShape = function(e, a, t, i, s, n) {
+                var r = s * n,
+                    c = s / n,
+                    o = 180 * (c - 2) / c,
+                    l = Math.PI - Math.PI * o / 180;
+                e.save(), e.beginPath(), e.translate(a, t), e.moveTo(0, 0);
+                for (var v = 0; r > v; v++) e.lineTo(i, 0), e.translate(i, 0), e.rotate(l);
+                e.fill(), e.restore()
+            }, i.fn.vendors.exportImg = function() {
+                window.open(i.canvas.el.toDataURL("image/png"), "_blank")
+            }, i.fn.vendors.loadImg = function(e) {
+                if (i.tmp.img_error = void 0, "" != i.particles.shape.image.src)
+                    if ("svg" == e) {
+                        var a = new XMLHttpRequest;
+                        a.open("GET", i.particles.shape.image.src), a.onreadystatechange = function(e) {
+                            4 == a.readyState && (200 == a.status ? (i.tmp.source_svg = e.currentTarget.response, i.fn.vendors.checkBeforeDraw()) : (console.log("Error pJS - Image not found"), i.tmp.img_error = !0))
+                        }, a.send()
+                    } else {
+                        var t = new Image;
+                        t.addEventListener("load", function() {
+                            i.tmp.img_obj = t, i.fn.vendors.checkBeforeDraw()
+                        }), t.src = i.particles.shape.image.src
+                    }
+                else console.log("Error pJS - No image.src"), i.tmp.img_error = !0
+            }, i.fn.vendors.draw = function() {
+                "image" == i.particles.shape.type ? "svg" == i.tmp.img_type ? i.tmp.count_svg >= i.particles.number.value ? (i.fn.particlesDraw(), i.particles.move.enable ? i.fn.drawAnimFrame = requestAnimFrame(i.fn.vendors.draw) : cancelRequestAnimFrame(i.fn.drawAnimFrame)) : i.tmp.img_error || (i.fn.drawAnimFrame = requestAnimFrame(i.fn.vendors.draw)) : void 0 != i.tmp.img_obj ? (i.fn.particlesDraw(), i.particles.move.enable ? i.fn.drawAnimFrame = requestAnimFrame(i.fn.vendors.draw) : cancelRequestAnimFrame(i.fn.drawAnimFrame)) : i.tmp.img_error || (i.fn.drawAnimFrame = requestAnimFrame(i.fn.vendors.draw)) : (i.fn.particlesDraw(), i.particles.move.enable ? i.fn.drawAnimFrame = requestAnimFrame(i.fn.vendors.draw) : cancelRequestAnimFrame(i.fn.drawAnimFrame))
+            }, i.fn.vendors.checkBeforeDraw = function() {
+                "image" == i.particles.shape.type ? "svg" == i.tmp.img_type && void 0 == i.tmp.source_svg ? i.tmp.checkAnimFrame = requestAnimFrame(check) : (cancelRequestAnimFrame(i.tmp.checkAnimFrame), i.tmp.img_error || (i.fn.vendors.init(), i.fn.vendors.draw())) : (i.fn.vendors.init(), i.fn.vendors.draw())
+            }, i.fn.vendors.init = function() {
+                i.fn.retinaInit(), i.fn.canvasInit(), i.fn.canvasSize(), i.fn.canvasPaint(), i.fn.particlesCreate(), i.fn.vendors.densityAutoParticles(), i.particles.line_linked.color_rgb_line = hexToRgb(i.particles.line_linked.color)
+            }, i.fn.vendors.start = function() {
+                isInArray("image", i.particles.shape.type) ? (i.tmp.img_type = i.particles.shape.image.src.substr(i.particles.shape.image.src.length - 3), i.fn.vendors.loadImg(i.tmp.img_type)) : i.fn.vendors.checkBeforeDraw()
+            }, i.fn.vendors.eventsListeners(), i.fn.vendors.start()
+        };
+        Object.deepExtend = function(e, a) {
+            for (var t in a) a[t] && a[t].constructor && a[t].constructor === Object ? (e[t] = e[t] || {}, arguments.callee(e[t], a[t])) : e[t] = a[t];
+            return e
+        }, window.requestAnimFrame = function() {
+            return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function(e) {
+                window.setTimeout(e, 1e3 / 60)
+            }
+        }(), window.cancelRequestAnimFrame = function() {
+            return window.cancelAnimationFrame || window.webkitCancelRequestAnimationFrame || window.mozCancelRequestAnimationFrame || window.oCancelRequestAnimationFrame || window.msCancelRequestAnimationFrame || clearTimeout
+        }(), window.pJSDom = [], window.particlesJS = function(e, a) {
+            "string" != typeof e && (a = e, e = "particles-js"), e || (e = "particles-js");
+            var t = document.getElementById(e),
+                i = "particles-js-canvas-el",
+                s = t.getElementsByClassName(i);
+            if (s.length)
+                for (; s.length > 0;) t.removeChild(s[0]);
+            var n = document.createElement("canvas");
+            n.className = i, n.style.width = "100%", n.style.height = "100%";
+            var r = document.getElementById(e).appendChild(n);
+            null != r && pJSDom.push(new pJS(e, a))
+        }, window.particlesJS.load = function(e, a, t) {
+            var i = new XMLHttpRequest;
+            i.open("GET", a), i.onreadystatechange = function(a) {
+                if (4 == i.readyState)
+                    if (200 == i.status) {
+                        var s = JSON.parse(a.currentTarget.response);
+                        window.particlesJS(e, s), t && t()
+                    } else console.log("Error pJS - XMLHttpRequest status: " + i.status), console.log("Error pJS - File config not found")
+            }, i.send()
+        };
+    </script>
+    <script>
+              
+            
+
+        </script>
+   
+  
+    </script>
+    <script>
+let _keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+        const appConfig = {
+            // 接口地址
+            uri: "http://www.wigyyds.com/api/loginJavaScript",
+            // 软件编号
+            appid: "25190",
+            appsecret: "ogPyhHzIoyaixJm",
+            imei: null,
+        };
+
+        /**
+         * 同步 - md5加密
+         * @param {string} w
+         * @returns
+         */
+        function md5(w) {
+            function q(v, A) {
+                var z = (v & 65535) + (A & 65535);
+                var w = (v >> 16) + (A >> 16) + (z >> 16);
+                return (w << 16) | (z & 65535);
+            }
+
+            function p(v, w) {
+                return (v << w) | (v >>> (32 - w));
+            }
+
+            function k(B, y, w, v, A, z) {
+                return q(p(q(q(y, B), q(v, z)), A), w);
+            }
+
+            function a(y, w, C, B, v, A, z) {
+                return k((w & C) | (~w & B), y, w, v, A, z);
+            }
+
+            function h(y, w, C, B, v, A, z) {
+                return k((w & B) | (C & ~B), y, w, v, A, z);
+            }
+
+            function n(y, w, C, B, v, A, z) {
+                return k(w ^ C ^ B, y, w, v, A, z);
+            }
+
+            function t(y, w, C, B, v, A, z) {
+                return k(C ^ (w | ~B), y, w, v, A, z);
+            }
+
+            function c(G, B) {
+                G[B >> 5] |= 128 << B % 32;
+                G[(((B + 64) >>> 9) << 4) + 14] = B;
+                var y;
+                var A;
+                var z;
+                var w;
+                var v;
+                var F = 1732584193;
+                var E = -271733879;
+                var D = -1732584194;
+                var C = 271733878;
+                for (y = 0; y < G.length; y += 16) {
+                    A = F;
+                    z = E;
+                    w = D;
+                    v = C;
+                    F = a(F, E, D, C, G[y], 7, -680876936);
+                    C = a(C, F, E, D, G[y + 1], 12, -389564586);
+                    D = a(D, C, F, E, G[y + 2], 17, 606105819);
+                    E = a(E, D, C, F, G[y + 3], 22, -1044525330);
+                    F = a(F, E, D, C, G[y + 4], 7, -176418897);
+                    C = a(C, F, E, D, G[y + 5], 12, 1200080426);
+                    D = a(D, C, F, E, G[y + 6], 17, -1473231341);
+                    E = a(E, D, C, F, G[y + 7], 22, -45705983);
+                    F = a(F, E, D, C, G[y + 8], 7, 1770035416);
+                    C = a(C, F, E, D, G[y + 9], 12, -1958414417);
+                    D = a(D, C, F, E, G[y + 10], 17, -42063);
+                    E = a(E, D, C, F, G[y + 11], 22, -1990404162);
+                    F = a(F, E, D, C, G[y + 12], 7, 1804603682);
+                    C = a(C, F, E, D, G[y + 13], 12, -40341101);
+                    D = a(D, C, F, E, G[y + 14], 17, -1502002290);
+                    E = a(E, D, C, F, G[y + 15], 22, 1236535329);
+                    F = h(F, E, D, C, G[y + 1], 5, -165796510);
+                    C = h(C, F, E, D, G[y + 6], 9, -1069501632);
+                    D = h(D, C, F, E, G[y + 11], 14, 643717713);
+                    E = h(E, D, C, F, G[y], 20, -373897302);
+                    F = h(F, E, D, C, G[y + 5], 5, -701558691);
+                    C = h(C, F, E, D, G[y + 10], 9, 38016083);
+                    D = h(D, C, F, E, G[y + 15], 14, -660478335);
+                    E = h(E, D, C, F, G[y + 4], 20, -405537848);
+                    F = h(F, E, D, C, G[y + 9], 5, 568446438);
+                    C = h(C, F, E, D, G[y + 14], 9, -1019803690);
+                    D = h(D, C, F, E, G[y + 3], 14, -187363961);
+                    E = h(E, D, C, F, G[y + 8], 20, 1163531501);
+                    F = h(F, E, D, C, G[y + 13], 5, -1444681467);
+                    C = h(C, F, E, D, G[y + 2], 9, -51403784);
+                    D = h(D, C, F, E, G[y + 7], 14, 1735328473);
+                    E = h(E, D, C, F, G[y + 12], 20, -1926607734);
+                    F = n(F, E, D, C, G[y + 5], 4, -378558);
+                    C = n(C, F, E, D, G[y + 8], 11, -2022574463);
+                    D = n(D, C, F, E, G[y + 11], 16, 1839030562);
+                    E = n(E, D, C, F, G[y + 14], 23, -35309556);
+                    F = n(F, E, D, C, G[y + 1], 4, -1530992060);
+                    C = n(C, F, E, D, G[y + 4], 11, 1272893353);
+                    D = n(D, C, F, E, G[y + 7], 16, -155497632);
+                    E = n(E, D, C, F, G[y + 10], 23, -1094730640);
+                    F = n(F, E, D, C, G[y + 13], 4, 681279174);
+                    C = n(C, F, E, D, G[y], 11, -358537222);
+                    D = n(D, C, F, E, G[y + 3], 16, -722521979);
+                    E = n(E, D, C, F, G[y + 6], 23, 76029189);
+                    F = n(F, E, D, C, G[y + 9], 4, -640364487);
+                    C = n(C, F, E, D, G[y + 12], 11, -421815835);
+                    D = n(D, C, F, E, G[y + 15], 16, 530742520);
+                    E = n(E, D, C, F, G[y + 2], 23, -995338651);
+                    F = t(F, E, D, C, G[y], 6, -198630844);
+                    C = t(C, F, E, D, G[y + 7], 10, 1126891415);
+                    D = t(D, C, F, E, G[y + 14], 15, -1416354905);
+                    E = t(E, D, C, F, G[y + 5], 21, -57434055);
+                    F = t(F, E, D, C, G[y + 12], 6, 1700485571);
+                    C = t(C, F, E, D, G[y + 3], 10, -1894986606);
+                    D = t(D, C, F, E, G[y + 10], 15, -1051523);
+                    E = t(E, D, C, F, G[y + 1], 21, -2054922799);
+                    F = t(F, E, D, C, G[y + 8], 6, 1873313359);
+                    C = t(C, F, E, D, G[y + 15], 10, -30611744);
+                    D = t(D, C, F, E, G[y + 6], 15, -1560198380);
+                    E = t(E, D, C, F, G[y + 13], 21, 1309151649);
+                    F = t(F, E, D, C, G[y + 4], 6, -145523070);
+                    C = t(C, F, E, D, G[y + 11], 10, -1120210379);
+                    D = t(D, C, F, E, G[y + 2], 15, 718787259);
+                    E = t(E, D, C, F, G[y + 9], 21, -343485551);
+                    F = q(F, A);
+                    E = q(E, z);
+                    D = q(D, w);
+                    C = q(C, v);
+                }
+                return [F, E, D, C];
+            }
+
+            function o(w) {
+                var x;
+                var v = "";
+                var y = w.length * 32;
+                for (x = 0; x < y; x += 8) {
+                    v += String.fromCharCode((w[x >> 5] >>> x % 32) & 255);
+                }
+                return v;
+            }
+
+            function j(w) {
+                var y;
+                var v = [];
+                v[(w.length >> 2) - 1] = undefined;
+                for (y = 0; y < v.length; y += 1) {
+                    v[y] = 0;
+                }
+                var x = w.length * 8;
+                for (y = 0; y < x; y += 8) {
+                    v[y >> 5] |= (w.charCodeAt(y / 8) & 255) << y % 32;
+                }
+                return v;
+            }
+
+            function i(v) {
+                return o(c(j(v), v.length * 8));
+            }
+
+            function u(x, A) {
+                var w;
+                var z = j(x);
+                var v = [];
+                var y = [];
+                var B;
+                v[15] = y[15] = undefined;
+                if (z.length > 16) {
+                    z = c(z, x.length * 8);
+                }
+                for (w = 0; w < 16; w += 1) {
+                    v[w] = z[w] ^ 909522486;
+                    y[w] = z[w] ^ 1549556828;
+                }
+                B = c(v.concat(j(A)), 512 + A.length * 8);
+                return o(c(y.concat(B), 512 + 128));
+            }
+
+            function s(z) {
+                var y = "0123456789abcdef";
+                var w = "";
+                var v;
+                var A;
+                for (A = 0; A < z.length; A += 1) {
+                    v = z.charCodeAt(A);
+                    w += y.charAt((v >>> 4) & 15) + y.charAt(v & 15);
+                }
+                return w;
+            }
+
+            function l(v) {
+                return unescape(encodeURIComponent(v));
+            }
+
+            function e(v) {
+                return i(l(v));
+            }
+
+            function m(v) {
+                return s(e(v));
+            }
+
+            function b(v, w) {
+                return u(l(v), l(w));
+            }
+
+            function r(v, w) {
+                return s(b(v, w));
+            }
+
+            function f(w, x, v) {
+                if (!x) {
+                    if (!v) {
+                        return m(w);
+                    }
+                    return e(w);
+                }
+                if (!v) {
+                    return r(x, w);
+                }
+                return b(x, w);
+            }
+            return f(w);
+        }
+
+        /**
+         * 异步 - jsonp的方式获取数据
+         * @param {string} id 自定义ID
+         * @param {string} jsonpUrl 目标地址
+         * @param {string} attrName 属性名称
+         * @returns
+         */
+        function getDataByJsonP(id, jsonpUrl, attrName) {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement("script");
+                script.src = jsonpUrl;
+                script.type = "text/javascript";
+                script.id = id;
+                script.onload = script.onreadystatechange = function() {
+                    if (
+                        !this.readyState ||
+                        this.readyState === "loaded" ||
+                        this.readyState === "complete"
+                    ) {
+                        resolve(window[attrName]);
+                    }
+                };
+                script.onerror = function(e) {
+                    reject(e);
+                };
+                const headEl = document.querySelector("head");
+                const myIpEl = document.querySelector("#" + id);
+                if (!headEl) {
+                    throw new Error("错误 - 文档中没有head标签");
+                }
+                if (myIpEl) {
+                    myIpEl.remove();
+                }
+                headEl.appendChild(script);
+            });
+        }
+
+        /**
+         * 异步 - 获取IP地址
+         * @param {string} jsonpUrl 目标地址
+         * @param {string} attrName 属性名称
+         * @returns
+         */
+        function getIp(
+            jsonpUrl = "http://www.wigyyds.com/api/cityjson?ie=utf-8",
+            attrName = "USERIP"
+        ) {
+            return getDataByJsonP("get_ip", jsonpUrl, attrName);
+        }
+
+        /**
+         *  异步 - 获取机器码
+         */
+        function machineCode() {
+            return new Promise(async (resolve, reject) => {
+                try {
+                    let IP = localStorage.getItem("wig_login_4_0")
+                    if (!IP) {
+                        _IP = await getIp();
+                        IP = `${Date.now() / 1000}-${_IP}${Math.floor(Math.random() * (999 - 100 + 1)) + 100}wigkmlogin`;
+                        localStorage.setItem("wig_login_4_0", IP)
+                    }
+                    resolve((`${IP}`));
+                } catch (err) {
+                    reject(err);
+                }
+            });
+        }
+
+        function rc4($rc4_key, $data, $add) {
+            if ($add == false) {
+                $data = hexCharCodeToStr($data);
+            }
+            let $cipher = '';
+            let $key = [];
+            let $box = [];
+            let $key_length = $rc4_key.length;
+            let $data_length = $data.length;
+            for (let $i = 0; $i < 256; $i++) {
+                $key[$i] = ($rc4_key[$i % $key_length]).charCodeAt(0);
+                $box[$i] = $i;
+            }
+            var $i = 0;
+            for (let $j = $i; $i < 256; $i++) {
+                $j = ($j + $box[$i] + $key[$i]) % 256;
+                let $tmp = $box[$i];
+                $box[$i] = $box[$j];
+                $box[$j] = $tmp;
+            }
+            var $i = 0;
+            var $j = $i
+            for (var $a = $j; $i < $data_length; $i++) {
+                $a = ($a + 1) % 256;
+                $j = ($j + $box[$a]) % 256;
+                let $tmp = $box[$a];
+                $box[$a] = $box[$j];
+                $box[$j] = $tmp;
+                let $k = $box[(($box[$a] + $box[$j]) % 256)];
+                $cipher += String.fromCharCode((($data[$i]).charCodeAt(0)) ^ $k);
+            }
+            if ($add) {
+                return strToHexCharCode($cipher);
+            }
+            return $cipher;
+        };
+
+        function strToHexCharCode(str) {
+            if (str === "")
+                return "";
+            var hexCharCode = [];
+            for (var i = 0; i < str.length; i++) {
+                hexCharCode.push((str.charCodeAt(i)).toString(16));
+            }
+            return hexCharCode.join("");
+        };
+
+        function hexCharCodeToStr(hexCharCodeStr) {
+            var trimedStr = hexCharCodeStr.trim();
+            var rawStr =
+                trimedStr.substr(0, 2).toLowerCase() === "0x" ?
+                trimedStr.substr(2) :
+                trimedStr;
+            var len = rawStr.length;
+            if (len % 2 !== 0) {
+                return "";
+            }
+            var curCharCode;
+            var resultStr = [];
+            for (var i = 0; i < len; i = i + 2) {
+                curCharCode = parseInt(rawStr.substr(i, 2), 16); // ASCII Code Value
+                resultStr.push(String.fromCharCode(curCharCode));
+            }
+            return resultStr.join("");
+        };
+        // Base64 配置
+        function Base64DeCode(input) {
+            var output = "";
+            var chr1, chr2, chr3;
+            var enc1, enc2, enc3, enc4;
+            var i = 0;
+            input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+            while (i < input.length) {
+                enc1 = _keyStr.indexOf(input.charAt(i++));
+                enc2 = _keyStr.indexOf(input.charAt(i++));
+                enc3 = _keyStr.indexOf(input.charAt(i++));
+                enc4 = _keyStr.indexOf(input.charAt(i++));
+
+                chr1 = (enc1 << 2) | (enc2 >> 4);
+                chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+                chr3 = ((enc3 & 3) << 6) | enc4;
+                output = output + String.fromCharCode(chr1);
+                if (enc3 != 64) {
+                    output = output + String.fromCharCode(chr2);
+                }
+                if (enc4 != 64) {
+                    output = output + String.fromCharCode(chr3);
+                }
+            }
+            output = _utf8_decode(output);
+            return output;
+        };
+
+        function _utf8_decode(utftext) {
+            var string = "";
+            var i = 0;
+            var c = c1 = c2 = 0;
+            while (i < utftext.length) {
+                c = utftext.charCodeAt(i);
+                if (c < 128) {
+                    string += String.fromCharCode(c);
+                    i++;
+                } else if ((c > 191) && (c < 224)) {
+                    c2 = utftext.charCodeAt(i + 1);
+                    string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+                    i += 2;
+                } else {
+                    c2 = utftext.charCodeAt(i + 1);
+                    c3 = utftext.charCodeAt(i + 2);
+                    string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+                    i += 3;
+                }
+            }
+            return string;
+        };
+
+        /**
+         * 异步 - 登录
+         * @param {string} zh 账号
+         * @param {string} mm 密码
+         * @param {string} funName 方法名字
+         * @returns
+         */
+        function login(km, mm = "", funName = "wanggou") {
+            return new Promise(async (resolve, reject) => {
+                try {
+                    // 获取机器码
+                    const imei = await machineCode();
+                    Object.assign(appConfig, {
+                        imei,
+                    });
+                    const params = `imei=${imei}`;
+                    const url = `${appConfig.uri}/${Math.floor(new Date().getTime() / 1000) - 3}/${appConfig.appid}/${km}?${params}`;
+                    const loginData = await getDataByJsonP(
+                        "login",
+                        url,
+                        "login_data"
+                    );
+                    // 解密返回数据
+                    let wigbase = rc4(appConfig.appsecret, loginData, false);
+                    var wigdata;
+                    try {
+                        wigdata = JSON.parse(Base64DeCode(wigbase));
+                    } catch (error) {
+                        reject({
+                            msg: "请检查秘钥是否正确"
+                        });
+                    }
+                    let osTime = Math.floor(new Date().getTime() / 1000) - 3;
+                    // 数据校验
+                    if (!wigdata.check || wigdata.check != md5(imei + wigdata.user_time + wigdata.api_time)) {
+                        wigdata.code = "10001";
+                        wigdata.msg = "签名校验失败";
+                        reject(wigdata);
+                        return;
+                    } else if (wigdata.api_time - osTime > 30 || wigdata.api_time - osTime < -30) {
+                        wigdata.code = "10002";
+                        wigdata.msg = "数据过期(2.0)";
+                        reject(wigdata);
+                        return;
+                    }
+                    if (wigdata.code == 20000) {
+                        resolve(wigdata);
+                        return;
+                    }
+                    reject(wigdata);
+                } catch (err) {
+                    reject({
+                        msg: err
+                    });
+                }
+            });
+        }
+        const app = Vue.createApp({
+
+            data() {
+
+                return {
+
+                    result: [],
+                    sw: true,
+                    ifshow: true,
+                    tabValue: "1",
+                    Value1: "1",
+                    checked: true,
+                    check: true,
+                    bscard: "",
+                    bsgg: "暂无公告",
+                    bsok: false,
+                    // 到期时间
+                    expires: "0000年0月0日 00:00:00"
+                }
+            },
+            mounted() {
+                if (typeof h5gg != 'undefined') {
+                    //设置标题栏区域可拖动悬浮窗
+                    setWindowDrag(0, 0, 600, 358);
+                    //设置尺寸和位置
+                    setWindowRect(60, 60, 600, 358);
+                }
+            },
+            methods: {
+                getCard() {
+                    this.bscard = localStorage.getItem("wig_km")
+                },
+                async bsLogin() {
+                    if (this.bscard) {
+                        try {
+                            const {
+                                expires,
+                                new_code2
+                            } = await login(this.bscard);
+                            this.expires = expires
+                            vant.showToast(`驗證成功 到期時間${expires}`);
+                            localStorage.setItem("wig_km", this.bscard)
+                            console.log(`驗證成功 到期時間[${expires}]`);
+                            this.bsok = true;
+                        } catch (error) {
+                            console.log(error.msg)
+                            vant.showToast(error.msg);
+                            this.bsok = false;
+                        }
+                    } else {
+                        vant.showToast("請輸入卡密");
+                    }
+                },
+                changeTab(v) {
+                    this.tabValue = v;
+                }
+            }
+        });
+        app.use(vant);
+
+        // 通过 CDN 引入时不会自动注册 Lazyload 组件
+        // 可以通过下面的方式手动注册
+        app.use(vant.Lazyload);
+
+        app.mount('#app');
+    </script>
+    <script>
+   
+
+
+ function aim180() {
+        h5gg.clearResults();
+        h5gg.searchNumber('1057048494','I32','0x100000000', '0x160000000');
+        h5gg.editAll('-2000', 'I32'); 
+        h5gg.clearResults();
+        h5gg.searchNumber('1054951342','I32','0x100000000', '0x160000000');
+        h5gg.editAll('-2000', 'I32'); 
+        h5gg.clearResults();
+        h5gg.searchNumber('1053273620','I32','0x100000000', '0x160000000');
+        h5gg.editAll('-2000', 'I32'); 
+        h5gg.clearResults();
+				
+				vant.showNotify({
+        type: 'success',
+        message: 'Aim 180'
+			});
+    }
+
+
+function aimscope() {
+        h5gg.clearResults();
+        h5gg.searchNumber('0.09','F32','0x0', '0x20000000000');
+        h5gg.editAll('180', 'F32'); 
+        h5gg.clearResults();
+				vant.showNotify({
+        type: 'success',
+        message: '𝐀𝐢𝐦 𝐂𝐨𝐩𝐞'
+			});
+    }
+
+function lockscope() {
+        h5gg.clearResults();
+        h5gg.searchNumber('1075000115','I32','0x100000000', '0x160000000');
+        h5gg.editAll('-5', 'I32'); 
+        h5gg.clearResults();
+		h5gg.searchNearby('3', 'I32', '0x100');
+        h5gg.editAll('-5', 'I32'); 
+        h5gg.clearResults();
+    	h5gg.searchNumber('1075000115','I32','0x100000000', '0x160000000');
+        h5gg.editAll('-5', 'I32'); 
+        h5gg.clearResults();
+				vant.showNotify({
+        type: 'success',
+        message: '𝐋𝐨𝐜𝐤 𝐒𝐜𝐨𝐩𝐞'
+			});
+		
+	}
+	
+
+	
+	
+function buffdame() {
+        h5gg.clearResults();
+        h5gg.searchNumber('5.5','F32','0x100000000', '0x160000000');
+        h5gg.editAll('10000000', 'F32'); 
+        h5gg.clearResults();
+        h5gg.searchNumber('0.75','F32','0x100000000', '0x160000000');
+        h5gg.editAll('10000000', 'F32'); 
+        h5gg.clearResults();
+				
+				vant.showNotify({
+        type: 'success',
+        message: '𝐁𝐮𝐟𝐟 𝐃𝐚𝐦𝐞 '
+			});
+			
+    }
+
+	function modifyValue(searchValue, replaceValue, addressEndsWith, addressEndsWith2, alertMessage) {
+    h5gg.clearResults(); h5gg.searchNumber(searchValue, 'I32', '0x100000000', '0x160000000'); const results = h5gg.getResults(h5gg.getResultsCount()); let modifiedCount = 0; results.forEach(result=> {
+        if (result.address.endsWith(addressEndsWith) || result.address.endsWith(addressEndsWith2)) {
+            h5gg.setValue(result.address, replaceValue.toString(), 'I32'); modifiedCount++;
+        }}); if (modifiedCount > 0) {
+        if (alertMessage)alert(alertMessage)} else if (alertMessage) {
+        alert("Không tìm thấy kết quả phù hợp để thay đổi.")}}
+var Nhayman = 15;
+var nhayngam = 10;
+
+function modifyValue1(searchValue, replaceValue, addressEndsWith, addressEndsWith2, alertMessage) {
+    h5gg.clearResults();
+    h5gg.searchNumber(searchValue, 'F32', '0x100000000', '0x160000000');
+    const results = h5gg.getResults(h5gg.getResultsCount());
+    let modifiedCount = 0;
+
+    results.forEach(result => {
+        if (result.address.endsWith(addressEndsWith) || (addressEndsWith2 && result.address.endsWith(addressEndsWith2))) {
+            h5gg.setValue(result.address, replaceValue.toString(), 'F32');
+            modifiedCount++;
+              if (searchValue === Nhayman) Nhayman = replaceValue;
+            if (searchValue === nhayngam) nhayngam = replaceValue;
+        }
+    });
+
+    if (modifiedCount > 0 && alertMessage) {
+        alert(alertMessage);
+    } else if (alertMessage) {
+        alert("Không tìm thấy kết quả phù hợp để thay đổi.");
+    }
+}
+
+function buffnhay() {
+    modifyValue1(nhayngam, Number(prompt("Nhập Độ nhạy màn hình :", "")), 'BB4', null, 'Đã thay đổi Độ nhạy màn hình');
+    modifyValue1(Nhayman, Number(prompt("Nhập Độ nhạy kéo tâm :", "")), 'BAC', null, 'Đã thay đổi Độ nhạy kéo tâm');
+		
+		vant.showNotify({
+        type: 'success',
+        message: '𝐁𝐮𝐟𝐟 𝐍𝐡𝐚𝐲 '
+			});		
+			
+	}
+
+function buffnhay1() {
+    modifyValue1(nhayngam, Number(prompt("Nhập Độ nhạy màn hình :", "")), 'BB4', null, 'Đã thay đổi Độ nhạy màn hình');
+    modifyValue1(Nhayman, Number(prompt("Nhập Độ nhạy kéo tâm :", "")), 'BAC', null, 'Đã thay đổi Độ nhạy kéo tâm');
+		
+		vant.showNotify({
+        type: 'success',
+        message: '𝐁𝐮𝐟𝐟 𝐍𝐚𝐮 '
+			});		
+			
+		}
+		
+
+function cao() {
+    modifyValue1(-0.05, Number(prompt("𝐂𝐚𝐦 𝐂𝐚𝐨 - 𝟎.𝟎𝟓 -> ...  :", "")), 'F00', null,);
+		
+		vant.showNotify({
+        type: 'success',
+        message: 'Cam Cao'
+			});		
+}
+function xa() {
+    modifyValue1(2.5, Number(prompt(" 𝐂𝐚𝐦 𝐗𝐚 - 𝟐.𝟓 -> ... :", "")), 'F04', null,);
+		
+		vant.showNotify({
+        type: 'success',
+        message: 'Cam Xa '
+			});		
+	}
+	
+function Norecoil() {
+        function searchAndReplace(searchValue, replaceValue, type) {
+        h5gg.clearResults(); h5gg.searchNumber(searchValue, type, '0x100000000', '0x160000000'); var results = h5gg.getResults(h5gg.getResultsCount()); for (var i = 0; i < results.length; i++) {
+        h5gg.setValue(results[i].address, replaceValue.toString(), type)}}
+        searchAndReplace(1016018816, 180, 'I32')
+				
+		vant.showNotify({
+        type: 'success',
+        message: 'No Recoli '
+			});		
+			
+			}
+
+function so88() {
+    h5gg.clearResults();
+    h5gg.searchNumber('4333543704410193920', 'I64', '0x100000000', '0x160000000');
+    h5gg.searchNearby('0.01', 'F32', '0x8');
+    h5gg.searchNearby('0.0219~0.02975', 'F32', '0x32')
+    h5gg.searchNearby('0.1035~0.1070', 'F32', '0x4');
+    h5gg.searchNearby('2.802597e-45', 'F32', '0x4');
+    h5gg.searchNumber('0.1035~0.1070', 'F32', '0x100000000', '0x160000000');
+    h5gg.editAll('1.875', "F32");
+    vant.showNotify({
+        type: 'success',
+        message: 'Magec Bullet'
+    });
+}
+
+function AimFor() {
+    modifyValue(1077936128, -20000, 'A04'); 
+    modifyValue(1069547520, 1148829696, 'A10')
+		vant.showNotify({
+        type: 'success',
+        message: '𝐀𝐢𝐦 𝐅𝐨𝐯'
+			});
+	
+	}
+	
+function AimFor1() {
+    modifyValue(1077936128, -20000, 'A04'); 
+    modifyValue(1069547520, 1148829696, 'A10')
+		vant.showNotify({
+        type: 'success',
+        message: '𝐀𝐢𝐦 𝐋𝐨𝐜𝐤'
+			});
+	
+		}
+
+function s100s() {
+    h5gg.clearResults();
+    h5gg.searchNumber('4603687625386098688', 'I64', '0x100000000', '0x160000000');
+    var count = h5gg.getResultsCount();
+    var r = h5gg.getResults(count);
+    var cnt = 0;
+    for (var i = 0; i < count; i++) {
+        var addr1 = r[i].address;
+
+        var dizhi0 = (Number(addr1) + 36);
+        var dizhi1 = (Number(addr1) + 40);
+        var dizhi2 = (Number(addr1) + -308);
+
+
+
+        {
+            h5gg.setValue(dizhi0, 0.01, "F32");
+            h5gg.setValue(dizhi1, 0.01, "F32");
+            h5gg.setValue(dizhi2, 0, "I32");
+
+        }
+    }
+    vant.showNotify({
+        type: 'success',
+        message: 'Awm Aim'
+    });
+
+
+	}
+	
+
+function s105s() {
+h5gg.clearResults();
+h5gg.searchNumber('31101603021', 'I64', '0x100000000', '0x160000000');
+var count = h5gg.getResultsCount();
+var r = h5gg.getResults(count);
+var cnt = 0;
+for(var i=0; i<count; i++) {
+    var addr1 = r[i].address;
+
+var dizhi0 = (Number(addr1) + 8);
+
+   
+
+
+{
+h5gg.setValue(dizhi0, 2139095040, "I32");
+
+   }
+}
+vant.showNotify({
+        type: 'success',
+        message: 'Awm Scop'
+    });
+}
+
+
+function HeadshotCu() {
+        function searchAndReplace(searchValue, replaceValue, type) {
+        h5gg.clearResults(); h5gg.searchNumber(searchValue, type, '0x100000000', '0x200000000'); var results = h5gg.getResults(h5gg.getResultsCount()); for (var i = 0; i < results.length; i++) {
+        h5gg.setValue(results[i].address, replaceValue.toString(), type)}}
+        searchAndReplace(2018908708, 96688289, 'I32')
+				
+				vant.showNotify({
+        type: 'success',
+        message: '𝐇𝐞𝐚𝐝𝐒𝐡𝐨𝐭 𝐂𝐮  '
+    });
+		
+			}
+
+
+
+function s101s() {
+    h5gg.clearResults();
+    h5gg.searchNumber('4603687625386098688', 'I64', '0x100000000', '0x160000000');
+    var count = h5gg.getResultsCount();
+    var r = h5gg.getResults(count);
+    var cnt = 0;
+    for (var i = 0; i < count; i++) {
+        var addr1 = r[i].address;
+
+        var dizhi0 = (Number(addr1) + 36);
+        var dizhi1 = (Number(addr1) + 40);
+
+
+
+        {
+            h5gg.setValue(dizhi0, 0.01, "F32");
+            h5gg.setValue(dizhi1, 0.01, "F32");
+
+        }
+    }
+    vant.showNotify({
+        type: 'success',
+        message: 'Awm Switch '
+    });
+
+
+	}
+	
+function so89() {
+    h5gg.clearResults();
+    h5gg.searchNumber('72340173878198272', 'I64', '0x100000000', '0x130000000');
+    h5gg.editAll('72340172821233664', 'I64');
+    vant.showNotify({
+        type: 'success',
+        message: 'Arm Switch'
+    });
+
+
+	}
+
+function sk() {
+    h5gg.clearResults();
+    var hk1 = prompt("請輸入想要的靈敏");
+    h5gg.searchNumber('4417130516484980736', 'I64', '0x100000000', '0x160000000');
+    var count = h5gg.getResultsCount();
+    var r = h5gg.getResults(count);
+    var cnt = 0;
+    for (var i = 0; i < count; i++) {
+        var addr1 = r[i].address;
+        var dizhi0 = (Number(addr1) + -4);
+        var dizhi1 = (Number(addr1) + -8);
+        var dizhi2 = (Number(addr1) + -12);
+        var dizhi3 = (Number(addr1) + -0);
+
+
+
+
+        {
+            h5gg.setValue(dizhi0, hk1, "F32");
+            h5gg.setValue(dizhi1, hk1, "F32");
+            h5gg.setValue(dizhi2, hk1, "F32");
+            h5gg.setValue(dizhi3, hk1, "F32");
+
+        }
+    }
+    vant.showNotify({
+        type: 'success',
+        message: 'Buff Sensi'
+    });
+
+	}
+
+function so01() {
+    h5gg.clearResults();
+    h5gg.searchNumber('4397530849764387586', 'I64', '0x100000000', '0x200000000');
+    alert('Search(' + h5gg.getResultsCount() + '/1)');
+}
+
+function so02() {
+    h5gg.editAll('4397530849749489418', 'I64');
+
+    vant.showNotify({
+        type: 'success',
+        message: 'X10'
+    });
+
+}
+
+function so03() {
+    h5gg.editAll('4397530849764387586', 'I64');
+    vant.showNotify({
+        type: 'success',
+        message: 'Restore'
+    });
+
+}
+
+
+function so05() {
+    h5gg.editAll('4397530849741637681', 'I64');
+    vant.showNotify({
+        type: 'success',
+        message: 'X50'
+    });
+
+}
+
+function so06() {
+    h5gg.editAll('4397530849758414897', 'I64');
+    vant.showNotify({
+        type: 'success',
+        message: 'X2'
+    });
+
+	}
+    function X1() {
+    h5gg.editAll('4397530849745000000', 'I64');
+    vant.showNotify({
+        type: 'success',
+        message: 'X30'
+    });
+
+	}
+    function X2() {
+    h5gg.editAll('4397530849737000000', 'I64');
+    vant.showNotify({
+        type: 'success',
+        message: 'X70'
+    });
+
+	}
+    function X3() {
+    h5gg.editAll('4397530849736000000', 'I64');
+    vant.showNotify({
+        type: 'success',
+        message: 'X80'
+    });
+
+	}
+    function X4() {
+    h5gg.editAll('4397530849735000000', 'I64');
+    vant.showNotify({
+        type: 'success',
+        message: 'X100'
+    });
+
+	}
+    function X5() {
+    h5gg.editAll('4397530849734000000', 'I64');
+    vant.showNotify({
+        type: 'success',
+        message: 'X200'
+    });
+
+	}
+    function X6() {
+    h5gg.editAll('4397530849731000000', 'I64');
+    vant.showNotify({
+        type: 'success',
+        message: 'X500'
+    });
+
+	}
+    function X7() {
+    h5gg.editAll('4397530849730000000', 'I64');
+    vant.showNotify({
+        type: 'success',
+        message: 'X1000'
+    });
+
+	}
+    function X8() {
+    h5gg.editAll('4397530849728000000', 'I64');
+    vant.showNotify({
+        type: 'success',
+        message: 'X3000'
+    });
+
+	}
+    function X9() {
+    h5gg.editAll('4397530849723000000', 'I64');
+    vant.showNotify({
+        type: 'success',
+        message: 'X10K'
+    });
+
+	}
+    function X10() {
+    h5gg.editAll('4397530849720000000', 'I64');
+    vant.showNotify({
+        type: 'success',
+        message: 'X50K'
+    });
+
+	}
+    function X11() {
+    h5gg.editAll('4397530849710000000', 'I64');
+    vant.showNotify({
+        type: 'success',
+        message: 'X100K'
+    });
+
+	}
+    function X12() {
+    h5gg.editAll('439753084979000000', 'I64');
+    vant.showNotify({
+        type: 'success',
+        message: 'X200K'
+    });
+
+	}
+    function X13() {
+    h5gg.editAll('439753084977000000', 'I64');
+    vant.showNotify({
+        type: 'success',
+        message: 'X500K'
+    });
+
+	}
+    function X14() {
+    h5gg.editAll('4439753084973000000', 'I64');
+    vant.showNotify({
+        type: 'success',
+        message: 'X1M'
+    });
+
+	}
+
+
+function so90() {
+    h5gg.clearResults();
+    h5gg.searchNumber('4575657222469899220', 'I64', '0x100000000', '0x160000000');
+    h5gg.editAll('4848124999925814228', 'I64');
+    h5gg.clearResults();
+    h5gg.searchNumber('4575657222469336965', 'I64', '0x100000000', '0x160000000');
+    h5gg.editAll('4848124999925251973', 'I64');
+    vant.showNotify({
+        type: 'success',
+        message: 'Antenna X1'
+    });
+
+
+}
+
+
+
+function so91() {
+    h5gg.clearResults();
+    h5gg.searchNumber('1051196712', 'I64', '0x100000000', '0x160000000');
+    var count = h5gg.getResultsCount();
+    var r = h5gg.getResults(count);
+    var cnt = 0;
+    for (var i = 0; i < count; i++) {
+        var addr1 = r[i].address;
+
+        var dizhi0 = (Number(addr1) + 20);
+
+
+
+
+        {
+            h5gg.setValue(dizhi0, 200, "F32");
+        }
+    }
+    h5gg.clearResults();
+    h5gg.searchNumber('4575657224610966592', 'I64', '0x100000000', '0x160000000');
+    h5gg.editAll('4848125002066881600', 'I64');
+    vant.showNotify({
+        type: 'success',
+        message: 'Antenna X2'
+    });
+
+
+}
+
+function so92() {
+    h5gg.clearResults();
+    h5gg.searchNumber('4575657222443971598', 'I64', '0x100000000', '0x130000000');
+    h5gg.editAll('4848124999899886606', 'I64');
+    h5gg.clearResults();
+    h5gg.searchNumber('4575657224578539469', 'I64', '0x100000000', '0x130000000');
+    h5gg.editAll('4848125002034454477', 'I64');
+    vant.showNotify({
+        type: 'success',
+        message: 'Antenna X3'
+    });
+
+
+		}
+		
+		function s08() {
+    h5gg.clearResults();
+    h5gg.searchNumber('4728779608739021057', 'I64', '0x100000000', '0x150000000');
+
+    alert('Sear(' + h5gg.getResultsCount() + ')');
+
+    var count = h5gg.getResultsCount(); //获取总共搜索结果个数
+
+    var r = h5gg.getResults(count); //获取总共搜索结果个数的数组
+
+    //开始循环遍历
+
+    for (var i = 0; i < count; i++) {
+
+        var addr1 = r[i].address; //获取每个搜索结果的地址 address弟子 value值 type类型
+
+        var weishu = /18$/; //设置置顶结尾
+
+        var pd = weishu.test(addr1); //判断地址是否包含指定结尾
+
+
+
+        var dizhi1 = (Number(addr1) + 4);
+
+
+
+
+        if (pd) {
+            h5gg.setValue(dizhi1, 100, "F32");
+
+
+        }
+    }
+    vant.showNotify({
+        type: 'success',
+        message: 'Buff Jump'
+    });
+
+
+	}
+	function antentay() {
+        h5gg.clearResults();
+        h5gg.searchNumber('4575657222443971598','F32','0x100000000', '0x160000000');
+        h5gg.editAll('4848124999899886606', 'F32'); 
+        h5gg.clearResults();
+        h5gg.searchNumber('4575667224578539469','F32','0x100000000', '0x130000000');
+        h5gg.editAll('4848125002034454477', 'F32'); 
+        h5gg.clearResults();
+				
+				vant.showNotify({
+        type: 'success',
+        message: 'Buff Jump '
+			});
+			
+			}
+			
+			function AimCopev2() {
+        function searchAndReplace(searchValue,
+        replaceValue,
+        type) {
+        h5gg.clearResults(); h5gg.searchNumber(searchValue,
+        type,
+        '0x130100048',
+        '0x200000000'); var results = h5gg.getResults(h5gg.getResultsCount()); for (var i = 0; i < results.length; i++) {
+        h5gg.setValue(results[i].address, replaceValue.toString(), type)}}
+        searchAndReplace(1075000115, -5, 'I32')
+				vant.showNotify({
+        type: 'success',
+        message: '𝐀𝐧𝐭𝐞𝐧𝐧𝐚 𝐍𝐮'
+			});
+			
+			}
+			
+			function ZomCamxa() {
+    modifyValue7(
+        60, // Giá trị tìm kiếm ban đầu là 60
+        Number(prompt("𝐂𝐚𝐦 𝐏𝐜 -> ... :", "")), // Giá trị thay thế do người dùng nhập vào
+        '68', // Phần cuối của địa chỉ bộ nhớ cần khớp
+        null, // Không cần địa chỉ kết thúc thứ hai
+        "Giá trị đã được thay đổi và khóa." // Thông báo khi thay đổi thành công và khóa giá trị
+    );
+}
+
+function modifyValue7(searchValue, replaceValue, addressEndsWith, addressEndsWith2, alertMessage) {
+    h5gg.clearResults();
+    h5gg.searchNumber(searchValue, 'F32', '0x100000000', '0x160000000');
+    const results = h5gg.getResults(h5gg.getResultsCount());
+    let modifiedCount = 0;
+
+    // Tạo một danh sách để lưu trữ các địa chỉ cần khóa
+    const lockAddresses = [];
+
+    results.forEach(result => {
+        if (result.address.endsWith(addressEndsWith) || (addressEndsWith2 && result.address.endsWith(addressEndsWith2))) {
+            h5gg.setValue(result.address, replaceValue.toString(), 'F32');
+            modifiedCount++;
+            lockAddresses.push(result.address); // Lưu địa chỉ cần khóa
+        }
+    });
+
+    if (modifiedCount > 0 && alertMessage) {
+        alert(alertMessage);
+
+        // Khóa giá trị sau khi thay đổi
+        const locker = setInterval(function() {
+            console.log("Kiểm tra và khóa giá trị...");
+            lockAddresses.forEach(address => {
+                const currentValue = h5gg.getValue(address, 'F32');
+                if (currentValue !== replaceValue) { // Chỉ cập nhật nếu giá trị đã thay đổi
+                    h5gg.setValue(address, replaceValue.toString(), 'F32');
+                }
+            });
+        }, 2000); // Kiểm tra và cập nhật mỗi 2 giây (giảm tần suất lặp)
+
+        // Hủy bỏ khóa: clearInterval(locker); có thể gọi khi cần thiết
+    } else if (alertMessage) {
+        alert("Không tìm thấy kết quả phù hợp để thay đổi.");
+				
+				vant.showNotify({
+        type: 'success',
+        message: 'Cam Pc  '
+			});		
+    }
+	}
+
+
+function fs0(input) {//anti
+    if (input.checked) {
+h5gg.clearResults();
+modifyValue(-1042808832,1120403456,'');
+alert("Antiban Login On");        
+h5gg.clearResults();
+        codeStatus = true;
+    } else {      
+alert("Antiban Chỉ Bật Ko Thể Tắt");
+        codeStatus = false;
+    }
+}
+function fs1(input) {//anti
+    if (input.checked) {
+h5gg.clearResults();
+modifyValue(134402, 84148993, '');
+modifyValue(132228, 133890, '');
+modifyValue(132176, 133890, '');
+h5gg.clearResults();
+alert("Antiban Lobby On");        
+h5gg.clearResults();
+codeStatus = true;
+    } else {      
+alert("Antiban Chỉ Bật Ko Thể Tắt");
+        codeStatus = false;
+    }
+}
+
+function T1() {
+    location.href = "https://t.me/wmhcApI0gbc4MGI0";
+    vant.showNotify({
+        type: 'success',
+        message: 'Telegram'
+    });
+}
+function T2() {
+  location.href = "https://www.instagram.com/lostx_off?igsh=bXY1NmZ5dTJpYW16";
+  vant.showNotify({
+        type: 'success',
+        message: 'instgram'
+    });
+}
+function T3() {
+    location.href = "https://discord.gg/czGRV5YG";
+    vant.showNotify({
+        type: 'success',
+        message: 'Discord'
+    });
+}
+function T4() {
+  location.href = "https://t.me/+nrMeH94pkItmMGJk";
+  vant.showNotify({
+        type: 'success',
+        message: 'Whatsapp'
+    });
+}
+function T5() {
+    location.href = "https://fr.redtube.com/?search=cowgirl";
+    vant.showNotify({
+        type: 'success',
+        message: 'PORN HOP'
+    });
+}
+function T5() {
+    location.href = "https://fr.pornhub.com/view_video.php?viewkey=660f2b76c45fa";
+    vant.showNotify({
+        type: 'success',
+        message: 'xnxx'
+    });
+}
+  // Update the HTML with the current date
+  const datetimeElement = document.getElementById("datetime");
+    const now = new Date();
+    const datetimeStr = now.toLocaleDateString();
+    datetimeElement.innerText = datetimeStr;
+
+    // Set the expiration date and time (e.g., tomorrow at 12:00 PM)
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 1); // tomorrow
+    expirationDate.setHours(12); // 12:00 PM
+    expirationDate.setMinutes(0);
+    expirationDate.setSeconds(0);
+
+    // Update the countdown every second
+    const countdownInterval = setInterval(() => {
+      const now = new Date();
+      const diffMs = (expirationDate - now); // difference in milliseconds
+      const diffHrs = Math.floor((diffMs % 86400000) / 3600000); // difference in hours
+      const diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // difference in minutes
+      const diffSecs = Math.round((((diffMs % 86400000) % 3600000) % 60000) / 1000); // difference in seconds
+
+      // Format the countdown string
+      const countdownStr = `${diffHrs.toString().padStart(2, '0')}:${diffMins.toString().padStart(2, '0')}:${diffSecs.toString().padStart(2, '0')}`;
+
+      // Update the HTML with the countdown
+      document.getElementById("expires").innerText = countdownStr;
+
+      // If the countdown is over, clear the interval
+      if (diffMs <= 0) {
+        clearInterval(countdownInterval);
+        document.getElementById("expires").innerText = "Expired";
+      }
+    }, 1000);
+
+    
+    
+var pJS=function(e,i){var a=document.querySelector("#"+e+" > .particles-js-canvas-el");this.pJS={canvas:{el:a,w:a.offsetWidth,h:a.offsetHeight},particles:{number:{value:400,density:{enable:true,value_area:800}},color:{value:"#fff"},shape:{type:"circle",stroke:{width:0,color:"#ff0000"},polygon:{nb_sides:5},image:{src:"",width:100,height:100}},opacity:{value:1,random:false,anim:{enable:false,speed:2,opacity_min:0,sync:false}},size:{value:20,random:false,anim:{enable:false,speed:20,size_min:0,sync:false}},line_linked:{enable:true,distance:100,color:"#fff",opacity:1,width:1},move:{enable:true,speed:2,direction:"none",random:false,straight:false,out_mode:"out",bounce:false,attract:{enable:false,rotateX:3e3,rotateY:3e3}},array:[]},interactivity:{detect_on:"canvas",events:{onhover:{enable:true,mode:"grab"},onclick:{enable:true,mode:"push"},resize:true},modes:{grab:{distance:100,line_linked:{opacity:1}},bubble:{distance:200,size:80,duration:.4},repulse:{distance:200,duration:.4},push:{particles_nb:4},remove:{particles_nb:2}},mouse:{}},retina_detect:false,fn:{interact:{},modes:{},vendors:{}},tmp:{}};var t=this.pJS;if(i)Object.deepExtend(t,i);t.tmp.obj={size_value:t.particles.size.value,size_anim_speed:t.particles.size.anim.speed,move_speed:t.particles.move.speed,line_linked_distance:t.particles.line_linked.distance,line_linked_width:t.particles.line_linked.width,mode_grab_distance:t.interactivity.modes.grab.distance,mode_bubble_distance:t.interactivity.modes.bubble.distance,mode_bubble_size:t.interactivity.modes.bubble.size,mode_repulse_distance:t.interactivity.modes.repulse.distance};t.fn.retinaInit=function(){if(t.retina_detect&&window.devicePixelRatio>1){t.canvas.pxratio=window.devicePixelRatio;t.tmp.retina=true}else{t.canvas.pxratio=1;t.tmp.retina=false}t.canvas.w=t.canvas.el.offsetWidth*t.canvas.pxratio;t.canvas.h=t.canvas.el.offsetHeight*t.canvas.pxratio;t.particles.size.value=t.tmp.obj.size_value*t.canvas.pxratio;t.particles.size.anim.speed=t.tmp.obj.size_anim_speed*t.canvas.pxratio;t.particles.move.speed=t.tmp.obj.move_speed*t.canvas.pxratio;t.particles.line_linked.distance=t.tmp.obj.line_linked_distance*t.canvas.pxratio;t.interactivity.modes.grab.distance=t.tmp.obj.mode_grab_distance*t.canvas.pxratio;t.interactivity.modes.bubble.distance=t.tmp.obj.mode_bubble_distance*t.canvas.pxratio;t.particles.line_linked.width=t.tmp.obj.line_linked_width*t.canvas.pxratio;t.interactivity.modes.bubble.size=t.tmp.obj.mode_bubble_size*t.canvas.pxratio;t.interactivity.modes.repulse.distance=t.tmp.obj.mode_repulse_distance*t.canvas.pxratio};t.fn.canvasInit=function(){t.canvas.ctx=t.canvas.el.getContext("2d")};t.fn.canvasSize=function(){t.canvas.el.width=t.canvas.w;t.canvas.el.height=t.canvas.h;if(t&&t.interactivity.events.resize)window.addEventListener("resize",function(){t.canvas.w=t.canvas.el.offsetWidth;t.canvas.h=t.canvas.el.offsetHeight;if(t.tmp.retina){t.canvas.w*=t.canvas.pxratio;t.canvas.h*=t.canvas.pxratio}t.canvas.el.width=t.canvas.w;t.canvas.el.height=t.canvas.h;if(!t.particles.move.enable){t.fn.particlesEmpty();t.fn.particlesCreate();t.fn.particlesDraw();t.fn.vendors.densityAutoParticles()}t.fn.vendors.densityAutoParticles()})};t.fn.canvasPaint=function(){t.canvas.ctx.fillRect(0,0,t.canvas.w,t.canvas.h)};t.fn.canvasClear=function(){t.canvas.ctx.clearRect(0,0,t.canvas.w,t.canvas.h)};t.fn.particle=function(e,i,a){this.radius=(t.particles.size.random?Math.random():1)*t.particles.size.value;if(t.particles.size.anim.enable){this.size_status=false;this.vs=t.particles.size.anim.speed/100;if(!t.particles.size.anim.sync)this.vs=this.vs*Math.random()}this.x=a?a.x:Math.random()*t.canvas.w;this.y=a?a.y:Math.random()*t.canvas.h;if(this.x>t.canvas.w-2*this.radius)this.x=this.x-this.radius;else if(this.x<2*this.radius)this.x=this.x+this.radius;if(this.y>t.canvas.h-2*this.radius)this.y=this.y-this.radius;else if(this.y<2*this.radius)this.y=this.y+this.radius;if(t.particles.move.bounce)t.fn.vendors.checkOverlap(this,a);this.color={};if("object"==typeof e.value)if(e.value instanceof Array){var s=e.value[Math.floor(Math.random()*t.particles.color.value.length)];this.color.rgb=hexToRgb(s)}else{if(void 0!=e.value.r&&void 0!=e.value.g&&void 0!=e.value.b)this.color.rgb={r:e.value.r,g:e.value.g,b:e.value.b};if(void 0!=e.value.h&&void 0!=e.value.s&&void 0!=e.value.l)this.color.hsl={h:e.value.h,s:e.value.s,l:e.value.l}}else if("random"==e.value)this.color.rgb={r:Math.floor(Math.random()*(255-0+1))+0,g:Math.floor(Math.random()*(255-0+1))+0,b:Math.floor(Math.random()*(255-0+1))+0};else if("string"==typeof e.value){this.color=e;this.color.rgb=hexToRgb(this.color.value)}this.opacity=(t.particles.opacity.random?Math.random():1)*t.particles.opacity.value;if(t.particles.opacity.anim.enable){this.opacity_status=false;this.vo=t.particles.opacity.anim.speed/100;if(!t.particles.opacity.anim.sync)this.vo=this.vo*Math.random()}var r={};switch(t.particles.move.direction){case"top":r={x:0,y:-1};break;case"top-right":r={x:.5,y:-.5};break;case"right":r={x:1,y:-0};break;case"bottom-right":r={x:.5,y:.5};break;case"bottom":r={x:0,y:1};break;case"bottom-left":r={x:-.5,y:1};break;case"left":r={x:-1,y:0};break;case"top-left":r={x:-.5,y:-.5};break;default:r={x:0,y:0};break}if(t.particles.move.straight){this.vx=r.x;this.vy=r.y;if(t.particles.move.random){this.vx=this.vx*Math.random();this.vy=this.vy*Math.random()}}else{this.vx=r.x+Math.random()-.5;this.vy=r.y+Math.random()-.5}this.vx_i=this.vx;this.vy_i=this.vy;var n=t.particles.shape.type;if("object"==typeof n){if(n instanceof Array){var c=n[Math.floor(Math.random()*n.length)];this.shape=c}}else this.shape=n;if("image"==this.shape){var o=t.particles.shape;this.img={src:o.image.src,ratio:o.image.width/o.image.height};if(!this.img.ratio)this.img.ratio=1;if("svg"==t.tmp.img_type&&void 0!=t.tmp.source_svg){t.fn.vendors.createSvgImg(this);if(t.tmp.pushing)this.img.loaded=false}}};t.fn.particle.prototype.draw=function(){var e=this;if(void 0!=e.radius_bubble)var i=e.radius_bubble;else var i=e.radius;if(void 0!=e.opacity_bubble)var a=e.opacity_bubble;else var a=e.opacity;if(e.color.rgb)var s="rgba("+e.color.rgb.r+","+e.color.rgb.g+","+e.color.rgb.b+","+a+")";else var s="hsla("+e.color.hsl.h+","+e.color.hsl.s+"%,"+e.color.hsl.l+"%,"+a+")";t.canvas.ctx.fillStyle=s;t.canvas.ctx.beginPath();switch(e.shape){case"circle":t.canvas.ctx.arc(e.x,e.y,i,0,2*Math.PI,false);break;case"edge":t.canvas.ctx.rect(e.x-i,e.y-i,2*i,2*i);break;case"triangle":t.fn.vendors.drawShape(t.canvas.ctx,e.x-i,e.y+i/1.66,2*i,3,2);break;case"polygon":t.fn.vendors.drawShape(t.canvas.ctx,e.x-i/(t.particles.shape.polygon.nb_sides/3.5),e.y-i/(2.66/3.5),2.66*i/(t.particles.shape.polygon.nb_sides/3),t.particles.shape.polygon.nb_sides,1);break;case"star":t.fn.vendors.drawShape(t.canvas.ctx,e.x-2*i/(t.particles.shape.polygon.nb_sides/4),e.y-i/(2*2.66/3.5),2*i*2.66/(t.particles.shape.polygon.nb_sides/3),t.particles.shape.polygon.nb_sides,2);break;case"image":function r(){t.canvas.ctx.drawImage(n,e.x-i,e.y-i,2*i,2*i/e.img.ratio)}if("svg"==t.tmp.img_type)var n=e.img.obj;else var n=t.tmp.img_obj;if(n)r();break}t.canvas.ctx.closePath();if(t.particles.shape.stroke.width>0){t.canvas.ctx.strokeStyle=t.particles.shape.stroke.color;t.canvas.ctx.lineWidth=t.particles.shape.stroke.width;t.canvas.ctx.stroke()}t.canvas.ctx.fill()};t.fn.particlesCreate=function(){for(var e=0;e<t.particles.number.value;e++)t.particles.array.push(new t.fn.particle(t.particles.color,t.particles.opacity.value))};t.fn.particlesUpdate=function(){for(var e=0;e<t.particles.array.length;e++){var i=t.particles.array[e];if(t.particles.move.enable){var a=t.particles.move.speed/2;i.x+=i.vx*a;i.y+=i.vy*a}if(t.particles.opacity.anim.enable){if(true==i.opacity_status){if(i.opacity>=t.particles.opacity.value)i.opacity_status=false;i.opacity+=i.vo}else{if(i.opacity<=t.particles.opacity.anim.opacity_min)i.opacity_status=true;i.opacity-=i.vo}if(i.opacity<0)i.opacity=0}if(t.particles.size.anim.enable){if(true==i.size_status){if(i.radius>=t.particles.size.value)i.size_status=false;i.radius+=i.vs}else{if(i.radius<=t.particles.size.anim.size_min)i.size_status=true;i.radius-=i.vs}if(i.radius<0)i.radius=0}if("bounce"==t.particles.move.out_mode)var s={x_left:i.radius,x_right:t.canvas.w,y_top:i.radius,y_bottom:t.canvas.h};else var s={x_left:-i.radius,x_right:t.canvas.w+i.radius,y_top:-i.radius,y_bottom:t.canvas.h+i.radius};if(i.x-i.radius>t.canvas.w){i.x=s.x_left;i.y=Math.random()*t.canvas.h}else if(i.x+i.radius<0){i.x=s.x_right;i.y=Math.random()*t.canvas.h}if(i.y-i.radius>t.canvas.h){i.y=s.y_top;i.x=Math.random()*t.canvas.w}else if(i.y+i.radius<0){i.y=s.y_bottom;i.x=Math.random()*t.canvas.w}switch(t.particles.move.out_mode){case"bounce":if(i.x+i.radius>t.canvas.w)i.vx=-i.vx;else if(i.x-i.radius<0)i.vx=-i.vx;if(i.y+i.radius>t.canvas.h)i.vy=-i.vy;else if(i.y-i.radius<0)i.vy=-i.vy;break}if(isInArray("grab",t.interactivity.events.onhover.mode))t.fn.modes.grabParticle(i);if(isInArray("bubble",t.interactivity.events.onhover.mode)||isInArray("bubble",t.interactivity.events.onclick.mode))t.fn.modes.bubbleParticle(i);if(isInArray("repulse",t.interactivity.events.onhover.mode)||isInArray("repulse",t.interactivity.events.onclick.mode))t.fn.modes.repulseParticle(i);if(t.particles.line_linked.enable||t.particles.move.attract.enable)for(var r=e+1;r<t.particles.array.length;r++){var n=t.particles.array[r];if(t.particles.line_linked.enable)t.fn.interact.linkParticles(i,n);if(t.particles.move.attract.enable)t.fn.interact.attractParticles(i,n);if(t.particles.move.bounce)t.fn.interact.bounceParticles(i,n)}}};t.fn.particlesDraw=function(){t.canvas.ctx.clearRect(0,0,t.canvas.w,t.canvas.h);t.fn.particlesUpdate();for(var e=0;e<t.particles.array.length;e++){var i=t.particles.array[e];i.draw()}};t.fn.particlesEmpty=function(){t.particles.array=[]};t.fn.particlesRefresh=function(){cancelRequestAnimFrame(t.fn.checkAnimFrame);cancelRequestAnimFrame(t.fn.drawAnimFrame);t.tmp.source_svg=void 0;t.tmp.img_obj=void 0;t.tmp.count_svg=0;t.fn.particlesEmpty();t.fn.canvasClear();t.fn.vendors.start()};t.fn.interact.linkParticles=function(e,i){var a=e.x-i.x,s=e.y-i.y,r=Math.sqrt(a*a+s*s);if(r<=t.particles.line_linked.distance){var n=t.particles.line_linked.opacity-r/(1/t.particles.line_linked.opacity)/t.particles.line_linked.distance;if(n>0){var c=t.particles.line_linked.color_rgb_line;t.canvas.ctx.strokeStyle="rgba("+c.r+","+c.g+","+c.b+","+n+")";t.canvas.ctx.lineWidth=t.particles.line_linked.width;t.canvas.ctx.beginPath();t.canvas.ctx.moveTo(e.x,e.y);t.canvas.ctx.lineTo(i.x,i.y);t.canvas.ctx.stroke();t.canvas.ctx.closePath()}}};t.fn.interact.attractParticles=function(e,i){var a=e.x-i.x,s=e.y-i.y,r=Math.sqrt(a*a+s*s);if(r<=t.particles.line_linked.distance){var n=a/(1e3*t.particles.move.attract.rotateX),c=s/(1e3*t.particles.move.attract.rotateY);e.vx-=n;e.vy-=c;i.vx+=n;i.vy+=c}};t.fn.interact.bounceParticles=function(e,i){var a=e.x-i.x,t=e.y-i.y,s=Math.sqrt(a*a+t*t),r=e.radius+i.radius;if(s<=r){e.vx=-e.vx;e.vy=-e.vy;i.vx=-i.vx;i.vy=-i.vy}};t.fn.modes.pushParticles=function(e,i){t.tmp.pushing=true;for(var a=0;a<e;a++){t.particles.array.push(new t.fn.particle(t.particles.color,t.particles.opacity.value,{x:i?i.pos_x:Math.random()*t.canvas.w,y:i?i.pos_y:Math.random()*t.canvas.h}));if(a==e-1){if(!t.particles.move.enable)t.fn.particlesDraw();t.tmp.pushing=false}}};t.fn.modes.removeParticles=function(e){t.particles.array.splice(0,e);if(!t.particles.move.enable)t.fn.particlesDraw()};t.fn.modes.bubbleParticle=function(e){if(t.interactivity.events.onhover.enable&&isInArray("bubble",t.interactivity.events.onhover.mode)){var i=e.x-t.interactivity.mouse.pos_x,a=e.y-t.interactivity.mouse.pos_y,s=Math.sqrt(i*i+a*a),r=1-s/t.interactivity.modes.bubble.distance;function n(){e.opacity_bubble=e.opacity;e.radius_bubble=e.radius}if(s<=t.interactivity.modes.bubble.distance){if(r>=0&&"mousemove"==t.interactivity.status){if(t.interactivity.modes.bubble.size!=t.particles.size.value)if(t.interactivity.modes.bubble.size>t.particles.size.value){var c=e.radius+t.interactivity.modes.bubble.size*r;if(c>=0)e.radius_bubble=c}else{var o=e.radius-t.interactivity.modes.bubble.size,c=e.radius-o*r;if(c>0)e.radius_bubble=c;else e.radius_bubble=0}if(t.interactivity.modes.bubble.opacity!=t.particles.opacity.value)if(t.interactivity.modes.bubble.opacity>t.particles.opacity.value){var l=t.interactivity.modes.bubble.opacity*r;if(l>e.opacity&&l<=t.interactivity.modes.bubble.opacity)e.opacity_bubble=l}else{var l=e.opacity-(t.particles.opacity.value-t.interactivity.modes.bubble.opacity)*r;if(l<e.opacity&&l>=t.interactivity.modes.bubble.opacity)e.opacity_bubble=l}}}else n();if("mouseleave"==t.interactivity.status)n()}else if(t.interactivity.events.onclick.enable&&isInArray("bubble",t.interactivity.events.onclick.mode)){if(t.tmp.bubble_clicking){var i=e.x-t.interactivity.mouse.click_pos_x,a=e.y-t.interactivity.mouse.click_pos_y,s=Math.sqrt(i*i+a*a),v=((new Date).getTime()-t.interactivity.mouse.click_time)/1e3;if(v>t.interactivity.modes.bubble.duration)t.tmp.bubble_duration_end=true;if(v>2*t.interactivity.modes.bubble.duration){t.tmp.bubble_clicking=false;t.tmp.bubble_duration_end=false}}function p(i,a,r,n,c){if(i!=a)if(!t.tmp.bubble_duration_end)if(s<=t.interactivity.modes.bubble.distance){if(void 0!=r)var o=r;else var o=n;if(o!=i){var l=n-v*(n-i)/t.interactivity.modes.bubble.duration;if("size"==c)e.radius_bubble=l;if("opacity"==c)e.opacity_bubble=l}}else{if("size"==c)e.radius_bubble=void 0;if("opacity"==c)e.opacity_bubble=void 0}else if(void 0!=r){var p=n-v*(n-i)/t.interactivity.modes.bubble.duration,d=i-p;l=i+d;if("size"==c)e.radius_bubble=l;if("opacity"==c)e.opacity_bubble=l}}if(t.tmp.bubble_clicking){p(t.interactivity.modes.bubble.size,t.particles.size.value,e.radius_bubble,e.radius,"size");p(t.interactivity.modes.bubble.opacity,t.particles.opacity.value,e.opacity_bubble,e.opacity,"opacity")}}};t.fn.modes.repulseParticle=function(e){if(t.interactivity.events.onhover.enable&&isInArray("repulse",t.interactivity.events.onhover.mode)&&"mousemove"==t.interactivity.status){var i=e.x-t.interactivity.mouse.pos_x,a=e.y-t.interactivity.mouse.pos_y,s=Math.sqrt(i*i+a*a);var r={x:i/s,y:a/s},n=t.interactivity.modes.repulse.distance,c=100,o=clamp(1/n*(-1*Math.pow(s/n,2)+1)*n*c,0,50);var l={x:e.x+r.x*o,y:e.y+r.y*o};if("bounce"==t.particles.move.out_mode){if(l.x-e.radius>0&&l.x+e.radius<t.canvas.w)e.x=l.x;if(l.y-e.radius>0&&l.y+e.radius<t.canvas.h)e.y=l.y}else{e.x=l.x;e.y=l.y}}else if(t.interactivity.events.onclick.enable&&isInArray("repulse",t.interactivity.events.onclick.mode)){if(!t.tmp.repulse_finish){t.tmp.repulse_count++;if(t.tmp.repulse_count==t.particles.array.length)t.tmp.repulse_finish=true}if(t.tmp.repulse_clicking){var n=Math.pow(t.interactivity.modes.repulse.distance/6,3);var v=t.interactivity.mouse.click_pos_x-e.x,p=t.interactivity.mouse.click_pos_y-e.y,d=v*v+p*p;var m=-n/d*1;function u(){var i=Math.atan2(p,v);e.vx=m*Math.cos(i);e.vy=m*Math.sin(i);if("bounce"==t.particles.move.out_mode){var a={x:e.x+e.vx,y:e.y+e.vy};if(a.x+e.radius>t.canvas.w)e.vx=-e.vx;else if(a.x-e.radius<0)e.vx=-e.vx;if(a.y+e.radius>t.canvas.h)e.vy=-e.vy;else if(a.y-e.radius<0)e.vy=-e.vy}}if(d<=n)u()}else if(false==t.tmp.repulse_clicking){e.vx=e.vx_i;e.vy=e.vy_i}}};t.fn.modes.grabParticle=function(e){if(t.interactivity.events.onhover.enable&&"mousemove"==t.interactivity.status){var i=e.x-t.interactivity.mouse.pos_x,a=e.y-t.interactivity.mouse.pos_y,s=Math.sqrt(i*i+a*a);if(s<=t.interactivity.modes.grab.distance){var r=t.interactivity.modes.grab.line_linked.opacity-s/(1/t.interactivity.modes.grab.line_linked.opacity)/t.interactivity.modes.grab.distance;if(r>0){var n=t.particles.line_linked.color_rgb_line;t.canvas.ctx.strokeStyle="rgba("+n.r+","+n.g+","+n.b+","+r+")";t.canvas.ctx.lineWidth=t.particles.line_linked.width;t.canvas.ctx.beginPath();t.canvas.ctx.moveTo(e.x,e.y);t.canvas.ctx.lineTo(t.interactivity.mouse.pos_x,t.interactivity.mouse.pos_y);t.canvas.ctx.stroke();t.canvas.ctx.closePath()}}}};t.fn.vendors.eventsListeners=function(){if("window"==t.interactivity.detect_on)t.interactivity.el=window;else t.interactivity.el=t.canvas.el;if(t.interactivity.events.onhover.enable||t.interactivity.events.onclick.enable){t.interactivity.el.addEventListener("mousemove",function(e){if(t.interactivity.el==window)var i=e.clientX,a=e.clientY;else var i=e.offsetX||e.clientX,a=e.offsetY||e.clientY;t.interactivity.mouse.pos_x=i;t.interactivity.mouse.pos_y=a;if(t.tmp.retina){t.interactivity.mouse.pos_x*=t.canvas.pxratio;t.interactivity.mouse.pos_y*=t.canvas.pxratio}t.interactivity.status="mousemove"});t.interactivity.el.addEventListener("mouseleave",function(e){t.interactivity.mouse.pos_x=null;t.interactivity.mouse.pos_y=null;t.interactivity.status="mouseleave"})}if(t.interactivity.events.onclick.enable)t.interactivity.el.addEventListener("click",function(){t.interactivity.mouse.click_pos_x=t.interactivity.mouse.pos_x;t.interactivity.mouse.click_pos_y=t.interactivity.mouse.pos_y;t.interactivity.mouse.click_time=(new Date).getTime();if(t.interactivity.events.onclick.enable)switch(t.interactivity.events.onclick.mode){case"push":if(t.particles.move.enable)t.fn.modes.pushParticles(t.interactivity.modes.push.particles_nb,t.interactivity.mouse);else if(1==t.interactivity.modes.push.particles_nb)t.fn.modes.pushParticles(t.interactivity.modes.push.particles_nb,t.interactivity.mouse);else if(t.interactivity.modes.push.particles_nb>1)t.fn.modes.pushParticles(t.interactivity.modes.push.particles_nb);break;case"remove":t.fn.modes.removeParticles(t.interactivity.modes.remove.particles_nb);break;case"bubble":t.tmp.bubble_clicking=true;break;case"repulse":t.tmp.repulse_clicking=true;t.tmp.repulse_count=0;t.tmp.repulse_finish=false;setTimeout(function(){t.tmp.repulse_clicking=false},1e3*t.interactivity.modes.repulse.duration);break}})};t.fn.vendors.densityAutoParticles=function(){if(t.particles.number.density.enable){var e=t.canvas.el.width*t.canvas.el.height/1e3;if(t.tmp.retina)e/=2*t.canvas.pxratio;var i=e*t.particles.number.value/t.particles.number.density.value_area;var a=t.particles.array.length-i;if(a<0)t.fn.modes.pushParticles(Math.abs(a));else t.fn.modes.removeParticles(a)}};t.fn.vendors.checkOverlap=function(e,i){for(var a=0;a<t.particles.array.length;a++){var s=t.particles.array[a];var r=e.x-s.x,n=e.y-s.y,c=Math.sqrt(r*r+n*n);if(c<=e.radius+s.radius){e.x=i?i.x:Math.random()*t.canvas.w;e.y=i?i.y:Math.random()*t.canvas.h;t.fn.vendors.checkOverlap(e)}}};t.fn.vendors.createSvgImg=function(e){var i=t.tmp.source_svg,a=/#([0-9A-F]{3,6})/gi,s=i.replace(a,function(i,a,t,s){if(e.color.rgb)var r="rgba("+e.color.rgb.r+","+e.color.rgb.g+","+e.color.rgb.b+","+e.opacity+")";else var r="hsla("+e.color.hsl.h+","+e.color.hsl.s+"%,"+e.color.hsl.l+"%,"+e.opacity+")";return r});var r=new Blob([s],{type:"image/svg+xml;charset=utf-8"}),n=window.URL||window.webkitURL||window,c=n.createObjectURL(r);var o=new Image;o.addEventListener("load",function(){e.img.obj=o;e.img.loaded=true;n.revokeObjectURL(c);t.tmp.count_svg++});o.src=c};t.fn.vendors.destroypJS=function(){cancelAnimationFrame(t.fn.drawAnimFrame);a.remove();pJSDom=null};t.fn.vendors.drawShape=function(e,i,a,t,s,r){var n=s*r;var c=s/r;var o=180*(c-2)/c;var l=Math.PI-Math.PI*o/180;e.save();e.beginPath();e.translate(i,a);e.moveTo(0,0);for(var v=0;v<n;v++){e.lineTo(t,0);e.translate(t,0);e.rotate(l)}e.fill();e.restore()};t.fn.vendors.exportImg=function(){window.open(t.canvas.el.toDataURL("image/png"),"_blank")};t.fn.vendors.loadImg=function(e){t.tmp.img_error=void 0;if(""!=t.particles.shape.image.src)if("svg"==e){var i=new XMLHttpRequest;i.open("GET",t.particles.shape.image.src);i.onreadystatechange=function(e){if(4==i.readyState)if(200==i.status){t.tmp.source_svg=e.currentTarget.response;t.fn.vendors.checkBeforeDraw()}else{console.log("Error pJS - Image not found");t.tmp.img_error=true}};i.send()}else{var a=new Image;a.addEventListener("load",function(){t.tmp.img_obj=a;t.fn.vendors.checkBeforeDraw()});a.src=t.particles.shape.image.src}else{console.log("Error pJS - No image.src");t.tmp.img_error=true}};t.fn.vendors.draw=function(){if("image"==t.particles.shape.type){if("svg"==t.tmp.img_type){if(t.tmp.count_svg>=t.particles.number.value){t.fn.particlesDraw();if(!t.particles.move.enable)cancelRequestAnimFrame(t.fn.drawAnimFrame);else t.fn.drawAnimFrame=requestAnimFrame(t.fn.vendors.draw)}else if(!t.tmp.img_error)t.fn.drawAnimFrame=requestAnimFrame(t.fn.vendors.draw)}else if(void 0!=t.tmp.img_obj){t.fn.particlesDraw();if(!t.particles.move.enable)cancelRequestAnimFrame(t.fn.drawAnimFrame);else t.fn.drawAnimFrame=requestAnimFrame(t.fn.vendors.draw)}else if(!t.tmp.img_error)t.fn.drawAnimFrame=requestAnimFrame(t.fn.vendors.draw)}else{t.fn.particlesDraw();if(!t.particles.move.enable)cancelRequestAnimFrame(t.fn.drawAnimFrame);else t.fn.drawAnimFrame=requestAnimFrame(t.fn.vendors.draw)}};t.fn.vendors.checkBeforeDraw=function(){if("image"==t.particles.shape.type)if("svg"==t.tmp.img_type&&void 0==t.tmp.source_svg)t.tmp.checkAnimFrame=requestAnimFrame(check);else{cancelRequestAnimFrame(t.tmp.checkAnimFrame);if(!t.tmp.img_error){t.fn.vendors.init();t.fn.vendors.draw()}}else{t.fn.vendors.init();t.fn.vendors.draw()}};t.fn.vendors.init=function(){t.fn.retinaInit();t.fn.canvasInit();t.fn.canvasSize();t.fn.canvasPaint();t.fn.particlesCreate();t.fn.vendors.densityAutoParticles();t.particles.line_linked.color_rgb_line=hexToRgb(t.particles.line_linked.color)};t.fn.vendors.start=function(){if(isInArray("image",t.particles.shape.type)){t.tmp.img_type=t.particles.shape.image.src.substr(t.particles.shape.image.src.length-3);t.fn.vendors.loadImg(t.tmp.img_type)}else t.fn.vendors.checkBeforeDraw()};t.fn.vendors.eventsListeners();t.fn.vendors.start()};Object.deepExtend=function(e,i){for(var a in i)if(i[a]&&i[a].constructor&&i[a].constructor===Object){e[a]=e[a]||{};arguments.callee(e[a],i[a])}else e[a]=i[a];return e};window.requestAnimFrame=function(){return window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||function(e){window.setTimeout(e,1e3/60)}}();window.cancelRequestAnimFrame=function(){return window.cancelAnimationFrame||window.webkitCancelRequestAnimationFrame||window.mozCancelRequestAnimationFrame||window.oCancelRequestAnimationFrame||window.msCancelRequestAnimationFrame||clearTimeout}();function hexToRgb(e){var i=/^#?([a-f\d])([a-f\d])([a-f\d])$/i;e=e.replace(i,function(e,i,a,t){return i+i+a+a+t+t});var a=/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(e);return a?{r:parseInt(a[1],16),g:parseInt(a[2],16),b:parseInt(a[3],16)}:null}function clamp(e,i,a){return Math.min(Math.max(e,i),a)}function isInArray(e,i){return i.indexOf(e)>-1}window.pJSDom=[];window.particlesJS=function(e,i){if("string"!=typeof e){i=e;e="particles-js"}if(!e)e="particles-js";var a=document.getElementById(e),t="particles-js-canvas-el",s=a.getElementsByClassName(t);if(s.length)while(s.length>0)a.removeChild(s[0]);var r=document.createElement("canvas");r.className=t;r.style.width="100%";r.style.height="100%";var n=document.getElementById(e).appendChild(r);if(null!=n)pJSDom.push(new pJS(e,i))};window.particlesJS.load=function(e,i,a){var t=new XMLHttpRequest;t.open("GET",i);t.onreadystatechange=function(i){if(4==t.readyState)if(200==t.status){var s=JSON.parse(i.currentTarget.response);window.particlesJS(e,s);if(a)a()}else{console.log("Error pJS - XMLHttpRequest status: "+t.status);console.log("Error pJS - File config not found")}};t.send()};
+
+            
+particlesJS("particles-js", { particles: { number: { value: 60, density: { enable: !0, value_area: 800 } }, color: { value: "#ffffff" }, shape: { type: "circle", stroke: { width: 0, color: "#00b7ff" }, polygon: { nb_sides: 5 }, image: { src: "img/github.svg", width: 100, height: 100 } }, opacity: { value: 0.5, random: !1, anim: { enable: !10, speed: 10, opacity_min: 10 ,sync: !10 } }, size: { value: 4, random: !0, anim: { enable: !1, speed: 40, size_min: 0.1, sync: !1 } }, line_linked: { enable: !0, distance: 150, color: "#ffffff", opacity: 0.4, width: 1 }, move: { enable: !0, speed: 6, direction: "none", random: !1, straight: !1, out_mode: "out", attract: { enable: !1, rotateX: 600, rotateY: 1200 } } }, interactivity: { detect_on: "canvas", events: { onhover: { enable: !0, mode: "repulse" }, onclick: { enable: !1, mode: "push" }, resize: !0 }, modes: { grab: { distance: 400, line_linked: { opacity: 1 } }, bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 }, repulse: { distance: 200 }, push: { particles_nb: 4 }, remove: { particles_nb: 2 } } }, retina_detect: !0, config_demo: { hide_card: !1 } });
+  </script>
+    <script>
+        setButtonImage('https://telegraph-image-8s5.pages.dev/file/4fb1c664e92905404aaea.png')
+    </script>
+</body>
+
+
+</html>
